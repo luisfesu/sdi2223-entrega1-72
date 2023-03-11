@@ -1,0 +1,109 @@
+<!-- nav.html -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <a class="navbar-brand" href="#"></a>
+    <img src="/images/student-48.png" alt="logo"/>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="my-navbarColor02">
+
+        <!-- Navbar Izquierda -->
+        <ul class="navbar-nav mr-auto"  sec:authorize="isAuthenticated()">
+
+            <!-- Home -->
+            <li class="nav-item ">
+                <a class="nav-link" href="/home">Home<span class="sr-only">(current)</span></a>
+            </li>
+
+            <!-- Menu de compra de Ofertas -->
+            <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"> Comprar
+                </a>
+                <!-- Sub-apartados del Menu -->
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#"> Buscar Ofertas     </a>
+                    <a class="dropdown-item" href="#"> Ofertas Compradas  </a>
+                    <a class="dropdown-item" href="#"> Conversaciones     </a>
+                </div>
+            </li>
+
+            <!-- Menu de Ofertas Propias -->
+            <li class="nav-item dropdown" >
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"> Mis Ofertas
+                </a>
+
+                <!-- Sub-apartados del Menu -->
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#"> Crear Oferta     </a>
+                    <a class="dropdown-item" href="#"> Ver mis Ofertas  </a>
+                </div>
+            </li>
+
+            <!-- TODO: Menu del Administrador
+            <li class="nav-item dropdown"  sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="nav-link dropdown-toggle" href="#" id="profesorDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"> Gestión de profesores
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/professor/list">Ver profesores</a>
+                </div>
+            </li>
+            -->
+        </ul>
+
+        <!--  TODO: Seguridad del menu -->
+        <!-- Navbar Derecha: Login Signup y I18N-->
+        <ul class="navbar-nav justify-content-end">
+
+            <!-- I18N -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="btnLanguage" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <span th:text="#{language.change}"></span>
+                </a>
+                <div id="languageDropdownMenuButton" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" id="btnEnglish" value="EN">
+                        <img th:src="@{/images/if_uk_flag.png}" style="border: 0; float: left; margin-right: 15px"/>
+                        <span th:text="#{language.en}">Inglés</span>
+                    </a>
+                    <a class="dropdown-item" id="btnSpanish" value="ES">
+                        <img th:src="@{/images/if_spain_flag.png}" style="border: 0; float: left; margin-right: 15px"/>
+                        <span th:text="#{language.es}">Español</span>
+                    </a>
+                </div>
+            </li>
+
+            <!-- <li sec:authorize="!isAuthenticated()" class="nav-item"> -->
+            <li class="nav-item">
+                <a class="nav-link" href="/signup ">
+                    <i class='fas fa-user-alt' style='font-size:16px'></i>
+                    <span th:text="#{signup.message}"></span>
+                </a>
+            </li>
+
+            <!-- <li sec:authorize="!isAuthenticated()" class="nav-item"> -->
+            <li class="nav-item">
+                <a class="nav-link" href="/login">
+                    <i class='fas fa-sign-in-alt' style='font-size:16px'></i>
+                    <span th:text="#{login.message}"></span>
+                </a>
+            </li>
+
+            <!-- <li sec:authorize="isAuthenticated()" class="nav-item"> -->
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">
+                    <i class='fas fa-sign-out-alt' style='font-size:16px'></i>
+                    <span th:text="#{logout.message}">Desconectar</span>
+                </a>
+            </li>
+        </ul>
+
+        <!--<form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+        </form> -->
+    </div>
+</nav>
