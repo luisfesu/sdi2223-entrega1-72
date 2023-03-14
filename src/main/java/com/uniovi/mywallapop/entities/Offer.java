@@ -60,5 +60,5 @@ public class Offer {
         this.user = user;
     }
 
-    // Comentario de pureba
+    // Comentario de prueba 2
 }
