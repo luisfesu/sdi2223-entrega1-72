@@ -59,4 +59,6 @@ public class Offer {
     public void setUser(User user) {
         this.user = user;
     }
+
+    // Comentario de pureba
 }
