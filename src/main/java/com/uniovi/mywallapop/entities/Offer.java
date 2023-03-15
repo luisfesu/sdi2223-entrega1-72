@@ -62,5 +62,12 @@ public class Offer {
         this.user = user;
     }
 
-    // Comentario de prueba 2
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
 }
