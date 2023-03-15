@@ -12,6 +12,8 @@ public class Offer {
     private String title;
     private String description;
     private String date;
+    
+    private Double price;
 
     @ManyToOne
     private User user;
