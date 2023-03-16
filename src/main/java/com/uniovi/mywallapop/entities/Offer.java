@@ -15,6 +15,7 @@ public class Offer {
     private String date;
 
     private Double price;
+    private Boolean buyed = false;
 
     @ManyToOne
     private User user;
@@ -83,6 +84,22 @@ public class Offer {
 
     public void setBuyer(User buyer) {
         this.buyer = buyer;
+    }
+
+    public Boolean getBuyed() {
+        return buyed;
+    }
+
+    public void setBuyed(Boolean buyed) {
+        this.buyed = buyed;
+    }
+
+    public Set<Conversation> getConversations() {
+        return conversations;
+    }
+
+    public void setConversations(Set<Conversation> conversations) {
+        this.conversations = conversations;
     }
 }
 
