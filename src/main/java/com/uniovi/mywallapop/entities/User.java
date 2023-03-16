@@ -10,15 +10,16 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
-    @Column(unique = true)
-    private String email;
     private String name;
     private String lastName;
 
     private String password;
+    @Column(unique = true)
+    private String email;
     @Transient //propiedad que no se almacena en la tabla.
     private String passwordConfirm;
 
+    private Double money = 100.00;
 
     private String role;
 
@@ -50,12 +51,21 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Offer> offers;
 
-    public User(String dni, String name, String lastName) {
+    public User(String email, String name, String lastName) {
         super();
-        this.email = dni;
+        this.email = email;
         this.name = name;
         this.lastName = lastName;
     }
+
+    public Double getMoney() {
+        return money;
+    }
+
+    public void setMoney(Double money) {
+        this.money = money;
+    }
+
     public User() { }
     public long getId() { return id; }
     public void setId(long id) { this.id = id; }

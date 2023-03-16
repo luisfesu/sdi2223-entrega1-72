@@ -13,8 +13,8 @@ public class Offer {
     private String title;
     private String description;
     private String date;
-
-    private double price;
+    
+    private Double price;
 
     @ManyToOne
     private User user;
@@ -68,6 +68,14 @@ public class Offer {
         this.user = user;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+    
     public User getBuyer() {
         return buyer;
     }
