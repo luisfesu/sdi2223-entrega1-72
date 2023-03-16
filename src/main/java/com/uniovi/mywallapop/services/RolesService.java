@@ -8,6 +8,4 @@ public class RolesService {
     public String[] getRoles() {
         return roles;
     }
-
-
 }
