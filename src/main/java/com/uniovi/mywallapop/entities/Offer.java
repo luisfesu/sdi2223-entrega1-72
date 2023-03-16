@@ -1,6 +1,7 @@
 package com.uniovi.mywallapop.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "offer")
@@ -13,13 +14,16 @@ public class Offer {
     private String description;
     private String date;
 
+    private double price;
+
     @ManyToOne
     private User user;
 
     @ManyToOne
     private User buyer;
 
-    private double price;
+    @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL)
+    private Set<Conversation> conversations;
 
     public Offer() {}
 

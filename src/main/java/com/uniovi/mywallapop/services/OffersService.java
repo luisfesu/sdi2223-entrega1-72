@@ -17,4 +17,8 @@ public class OffersService {
     public List<Offer> getOffersByBuyer(User user){
         return offersRepository.findAllByBuyer(user);
     }
+
+    public Offer getOfferById(Long id){
+        return offersRepository.findById(id).get();
+    }
 }
