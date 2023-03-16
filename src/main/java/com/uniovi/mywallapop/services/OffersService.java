@@ -37,7 +37,7 @@ public class OffersService {
     }
 
     public Page<Offer> searchOfferByTitle(Pageable pageabe, String searchtext) {
-        Page<Offer> offers = new PageImpl<Offer>(new LinkedList<Offer>());
+        Page<Offer> offers;
 
         searchtext = "%" + searchtext + "%";
 

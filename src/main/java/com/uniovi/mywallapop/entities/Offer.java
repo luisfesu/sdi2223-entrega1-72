@@ -29,6 +29,13 @@ public class Offer {
     public Offer() {
     }
 
+    public Offer(String title, String description, Double price,String date) {
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.price = price;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

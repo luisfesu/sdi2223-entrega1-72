@@ -76,17 +76,20 @@ public class OffersController {
     }
 
     @RequestMapping("/offer/search")
-    public String getOffersBySearch(Model model, Pageable pageable,
-                                   @RequestParam(value = "", required = false) String searchtext) {
+    public String getOffersBySearch(Model model, Pageable pageable, Principal principal,
+                                   @RequestParam(value = "", required = false) String searchText) {
 
-        Page<Offer> offers = new PageImpl<Offer>(new LinkedList<>());
+        Page<Offer> offers;
+        String currentUserMail = principal.getName();
 
-        if(searchtext != null && !searchtext.isEmpty()) {
-            offers = offersService.searchOfferByTitle(pageable, searchtext);
+        if(searchText != null && !searchText.isEmpty()) {
+            offers = offersService.searchOfferByTitle(pageable, searchText);
         } else {
             offers = offersService.getAllOffers(pageable);
         }
-        model.addAttribute("offerList", offers.getContent());
+
+        model.addAttribute("offerList", offers.getContent()); // Lista de ofertas
+        model.addAttribute("page", offers); // Pagina
         return "offer/search";
     }
 

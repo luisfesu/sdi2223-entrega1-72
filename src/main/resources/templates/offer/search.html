@@ -15,7 +15,7 @@
     <form class="form-inline" action="/offer/search">
         <div class="form-group">
             <input name="searchText" type="text" class="form-control" size="50"
-            th:placeholder="#{offer.search.placeholder}" >
+            th:placeholder="#{offer.search.placeholder}">
         </div>
         <button type="submit" class="btn btn-primary" th:text="#{button.search}"></button>
     </form>
@@ -46,7 +46,7 @@
             </tbody>
         </table>
     </div>
-
+    <footer th:replace="fragments/pagination"/>
 </div>
 <footer th:replace="fragments/footer"/>
 </body>
