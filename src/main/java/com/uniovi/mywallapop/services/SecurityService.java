@@ -37,4 +37,5 @@ public class SecurityService {
             logger.debug(String.format("Auto login %s successfully!", email));
         }
     }
+
 }

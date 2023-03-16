@@ -12,7 +12,7 @@
                 <label class="control-label col-sm-2" for="title" th:text="#{offer.add.title.label}"> bad label </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="title" name="title"
-                           th:placeholder="#{offer.add.title.placeholder}" required="true"/>
+                           th:placeholder="#{offer.add.title.placeholder}"/>
 
                     <span class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
                 </div>
@@ -22,7 +22,7 @@
                 <label class="control-label col-sm-2" for="description" th:text="#{offer.add.description.label}"> bad label </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="description" name="description"
-                           th:placeholder="#{offer.add.description.placeholder}" required="true"/>
+                           th:placeholder="#{offer.add.description.placeholder}"/>
 
                     <span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
                 </div>
@@ -32,7 +32,7 @@
                 <label class="control-label col-sm-2" for="price" th:text="#{offer.add.price.label}"> bad label </label>
                 <div class="col-sm-10">
                     <input type="number" class="form-control" id="price" name="price"
-                           th:placeholder="#{offer.add.price.placeholder}" required="true"/>
+                           th:placeholder="#{offer.add.price.placeholder}"/>
 
                     <span class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
                 </div>
