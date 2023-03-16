@@ -30,7 +30,7 @@ public class ConversationsController {
 
     @RequestMapping(value = "/conversation/{id}", method = RequestMethod.GET)
     private String getConversation(Model model, @PathVariable Long id, Principal principal){
-        Offer offer = offersService.getOfferById(id);
+        Offer offer = offersService.getOffer(id);
         User seller = offer.getUser();
 
         String email = principal.getName();
