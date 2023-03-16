@@ -9,12 +9,14 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
-    @Column(unique = true)
-    private String dni;
+    //@Column(unique = true)
+    //private String dni;
     private String name;
     private String lastName;
 
     private String password;
+    @Column(unique = true)
+    private String email;
     @Transient //propiedad que no se almacena en la tabla.
     private String passwordConfirm;
 
@@ -46,17 +48,17 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Offer> offers;
 
-    public User(String dni, String name, String lastName) {
+    public User(String email, String name, String lastName) {
         super();
-        this.dni = dni;
+        this.email = email;
         this.name = name;
         this.lastName = lastName;
     }
     public User() { }
     public long getId() { return id; }
     public void setId(long id) { this.id = id; }
-    public String getDni() {return dni; }
-    public void setDni(String dni) { this.dni = dni; }
+    public String getEmail() {return email; }
+    public void setEmail(String dni) { this.email = dni; }
     public String getName() {
         return name;
     }
