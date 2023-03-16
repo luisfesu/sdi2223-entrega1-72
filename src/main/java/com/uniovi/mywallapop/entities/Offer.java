@@ -13,7 +13,7 @@ public class Offer {
     private String title;
     private String description;
     private String date;
-    
+
     private Double price;
 
     @ManyToOne
@@ -25,7 +25,8 @@ public class Offer {
     @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL)
     private Set<Conversation> conversations;
 
-    public Offer() {}
+    public Offer() {
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -75,7 +76,7 @@ public class Offer {
     public void setPrice(Double price) {
         this.price = price;
     }
-    
+
     public User getBuyer() {
         return buyer;
     }
@@ -83,12 +84,5 @@ public class Offer {
     public void setBuyer(User buyer) {
         this.buyer = buyer;
     }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 }
+
