@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">>
+<head th:replace="fragments/head"></head>
+<body>
+
+<nav th:replace="fragments/nav"></nav>
+
+<div class="container" id="main-container">
+  <h2>Mis ofertas compradas</h2>
+  <p>Las ofertas que has comprado son:</p>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">Título</th>
+        <th scope="col">Detalle</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Email Vendedor</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="offer : ${offerList}">
+        <td scope="row" th:text="${offer.title}"> 1</td>
+        <td th:text="${offer.description}"> Ejercicio 1</td>
+        <td th:text="${offer.price}">10</td>
+        <td th:text="${offer.user.email}">10</td>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<footer th:replace="fragments/footer"></footer>
+</body>
+</html>

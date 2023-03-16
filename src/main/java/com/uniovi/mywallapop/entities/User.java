@@ -1,6 +1,7 @@
 package com.uniovi.mywallapop.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -10,7 +11,7 @@ public class User {
     @GeneratedValue
     private long id;
     @Column(unique = true)
-    private String dni;
+    private String email;
     private String name;
     private String lastName;
 
@@ -20,6 +21,9 @@ public class User {
 
 
     private String role;
+
+    @OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
+    private Set<Offer> purchasedOffers;
 
     public String getRole() {
         return role;
@@ -48,15 +52,15 @@ public class User {
 
     public User(String dni, String name, String lastName) {
         super();
-        this.dni = dni;
+        this.email = dni;
         this.name = name;
         this.lastName = lastName;
     }
     public User() { }
     public long getId() { return id; }
     public void setId(long id) { this.id = id; }
-    public String getDni() {return dni; }
-    public void setDni(String dni) { this.dni = dni; }
+    public String getEmail() {return email; }
+    public void setEmail(String dni) { this.email = dni; }
     public String getName() {
         return name;
     }

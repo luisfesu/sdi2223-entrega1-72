@@ -16,8 +16,12 @@ public class Offer {
     @ManyToOne
     private User user;
 
-    public Offer() {}
+    @ManyToOne
+    private User buyer;
 
+    private double price;
+
+    public Offer() {}
 
     public void setId(Long id) {
         this.id = id;
@@ -58,5 +62,21 @@ public class Offer {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public User getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(User buyer) {
+        this.buyer = buyer;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
