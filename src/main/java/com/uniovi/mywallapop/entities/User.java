@@ -20,6 +20,7 @@ public class User {
     @Transient //propiedad que no se almacena en la tabla.
     private String passwordConfirm;
 
+    private Double money = 100.00;
 
     private String role;
 
@@ -54,6 +55,15 @@ public class User {
         this.name = name;
         this.lastName = lastName;
     }
+
+    public Double getMoney() {
+        return money;
+    }
+
+    public void setMoney(Double money) {
+        this.money = money;
+    }
+
     public User() { }
     public long getId() { return id; }
     public void setId(long id) { this.id = id; }
