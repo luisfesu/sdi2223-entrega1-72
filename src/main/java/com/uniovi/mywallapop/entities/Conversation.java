@@ -21,7 +21,16 @@ public class Conversation {
     @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL)
     private Set<Message> messages;
 
+    @ManyToOne
+    private Offer offer;
+
     public Conversation() {}
+
+    public Conversation(User userA, User userB, Offer offer) {
+        this.userA = userA;
+        this.userB = userB;
+        this.offer = offer;
+    }
 
     public Long getId() {
         return id;
@@ -53,5 +62,13 @@ public class Conversation {
 
     public void setMessages(Set<Message> messages) {
         this.messages = messages;
+    }
+
+    public Offer getOffer() {
+        return offer;
+    }
+
+    public void setOffer(Offer offer) {
+        this.offer = offer;
     }
 }

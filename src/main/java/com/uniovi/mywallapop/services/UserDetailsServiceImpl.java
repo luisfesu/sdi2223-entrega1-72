@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String dni) throws UsernameNotFoundException {
-        User user = usersRepository.findByDni(dni);
+        User user = usersRepository.findByEmail(dni);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
         //grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
