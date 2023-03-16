@@ -4,6 +4,8 @@ import com.uniovi.mywallapop.entities.Offer;
 import com.uniovi.mywallapop.entities.User;
 import com.uniovi.mywallapop.repositories.OffersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -22,5 +24,10 @@ public class OffersService {
     }
     public List<Offer> getOffersByBuyer(User user){
         return offersRepository.findAllByBuyer(user);
+    }
+
+    public Page<Offer> getOffer(Pageable pageable){
+        Page<Offer> offers = offersRepository.findAll(pageable);
+        return offers;
     }
 }
