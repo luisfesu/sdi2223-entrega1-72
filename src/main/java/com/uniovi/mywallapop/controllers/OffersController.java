@@ -51,7 +51,7 @@ public class OffersController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         String userDni = authentication.getName();
-        User currentRegisteredUser = usersService.getUserByDni(userDni);
+        User currentRegisteredUser = usersService.getUserByEmail(userDni);
 
         offer.setUser(currentRegisteredUser);
         offer.setDate(LocalDateTime.now().toString());

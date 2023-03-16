@@ -9,13 +9,14 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
-
-    @Column(unique = true)
-    private String email;
+    //@Column(unique = true)
+    //private String dni;
     private String name;
     private String lastName;
 
     private String password;
+    @Column(unique = true)
+    private String email;
     @Transient //propiedad que no se almacena en la tabla.
     private String passwordConfirm;
 

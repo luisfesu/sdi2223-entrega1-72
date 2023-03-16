@@ -13,22 +13,33 @@ import java.util.List;
 public class UsersService {
     @Autowired
     private UsersRepository usersRepository;
+    
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    public User getUserByDni(String userDni) {
-        return usersRepository.findByDni(userDni);
+    public List<User> getUsers() {
+        List<User> users = new ArrayList<User>();
+        usersRepository.findAll().forEach(users::add);
+        return users;
     }
+
+    public User getUser(Long id) {
+        return usersRepository.findById(id).get();
+    }
+    //public void addUser(User user) {
+//        usersRepository.save(user);
+//    }
 
     public void addUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         usersRepository.save(user);
     }
 
-    public List<User> getUsers() {
-        List<User> users = new ArrayList<User>();
-        usersRepository.findAll().forEach(users::add);
-        return users;
+    public void editUser(User user) {
+        //user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        usersRepository.save(user);
+    }
+    public User getUserByEmail(String email) {
+        return usersRepository.findByEmail(email);
     }
 }

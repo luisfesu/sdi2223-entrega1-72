@@ -25,7 +25,7 @@ public class UsersController {
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signup(@ModelAttribute("user") User user, Model model) {
         usersService.addUser(user);
-        securityService.autoLogin(user.getDni(), user.getPasswordConfirm());
+        securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
         return "redirect:home";
     }
 
