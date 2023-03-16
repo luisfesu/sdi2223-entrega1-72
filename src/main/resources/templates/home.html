@@ -12,9 +12,7 @@
         <!--<b th:inline="text"> [[${#httpServletRequest.remoteUser}]] </b> -->
         <b th:inline="text" sec:authentication="principal.username"></b>
     </p>
-    <p>Notas del usuario</p>
 </div>
-<footer th:replace="fragments/pagination"/>
 <footer th:replace="fragments/footer"/>
 </body>
 </html>

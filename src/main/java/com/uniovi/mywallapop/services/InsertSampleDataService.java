@@ -15,7 +15,7 @@ public class InsertSampleDataService {
     @PostConstruct
     public void init() {
         // Comentar y descomentar para añadir la sampleData o no
-        insertSampleData();
+       // insertSampleData();
     }
 
     private void insertSampleData() {
