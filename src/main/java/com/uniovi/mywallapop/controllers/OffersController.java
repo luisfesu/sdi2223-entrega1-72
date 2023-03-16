@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 public class OffersController {
@@ -59,5 +60,14 @@ public class OffersController {
         offersService.addOffer(offer);
         return "redirect:/offer/list";
     }
+    
+    @RequestMapping("/offer/purchased")
+    public String getOffersPurchased(Model model, Principal principal){
+        String email = principal.getName();
+        User user = usersService.getUserByEmail(email);
+        List<Offer> offerList = offersService.getOffersByBuyer(user);
 
+        model.addAttribute("offerList", offerList);
+        return "offer/purchased";
+    }
 }
