@@ -61,4 +61,13 @@ public class Offer {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
 }

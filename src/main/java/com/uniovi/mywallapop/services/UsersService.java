@@ -1,6 +1,6 @@
 package com.uniovi.mywallapop.services;
 
-import com.uniovi.mywallapop.entities.User;
+import com.uniovi.mywallapop.entities.*;
 import com.uniovi.mywallapop.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,6 +13,8 @@ import java.util.List;
 public class UsersService {
     @Autowired
     private UsersRepository usersRepository;
+    
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     public List<User> getUsers() {
@@ -27,10 +29,12 @@ public class UsersService {
     //public void addUser(User user) {
 //        usersRepository.save(user);
 //    }
+
     public void addUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         usersRepository.save(user);
     }
+
     public void editUser(User user) {
         //user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         usersRepository.save(user);
@@ -38,5 +42,4 @@ public class UsersService {
     public User getUserByEmail(String email) {
         return usersRepository.findByEmail(email);
     }
-
 }
