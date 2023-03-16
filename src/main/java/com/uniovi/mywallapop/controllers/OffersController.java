@@ -93,4 +93,14 @@ public class OffersController {
         return "offer/search";
     }
 
+
+    @RequestMapping("/offer/list")
+    public String getOffersByUser(Model model, Principal principal) {
+        String email = principal.getName();
+        User user = usersService.getUserByEmail(email);
+        List<Offer> offers = offersService.getOffersByUser(user);
+
+        model.addAttribute("offerList", offers);
+        return "offer/list";
+    }
 }

@@ -44,4 +44,8 @@ public class OffersService {
         offers = offersRepository.searchByTitle(pageabe, searchtext);
         return  offers;
     }
+
+    public List<Offer> getOffersByUser(User user) {
+        return offersRepository.findAllByUser(user);
+    }
 }

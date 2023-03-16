@@ -16,4 +16,12 @@ public interface OffersRepository extends CrudRepository<Offer, Long> {
 
     @Query("select o FROM Offer o WHERE (LOWER(o.title) LIKE LOWER(?1))")
     Page<Offer> searchByTitle(Pageable pageable, String searchtext);
+
+    /***
+     * Devuelve las ofertas pertenecientes al usuario registrado actual. La oferta pertenece a un usuario si ha sido
+     * este el que la ha creado.
+     * @param user Usuario actual registrado en la aplicación.
+     * @return Lista de Ofertas para creadas por el usuario registrado.
+     */
+    List<Offer> findAllByUser(User user);
 }

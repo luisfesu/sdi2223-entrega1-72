@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/head"/>
+
+<body>
+<nav th:replace="fragments/nav"/>
+
+<div class="container" id="main-container">
+  <h2 th:text="#{offer.list.h2}"></h2>
+  <p th:text="#{offer.list.paragraph}"></p>
+
+  <div class="table-responsive">
+    <table class="table table-hover" id="tableOffers">
+      <thead>
+        <tr>
+          <th scope="col" th:text="#{offer.list.table.title}"></th>
+          <th scope="col" th:text="#{offer.list.table.description}"></th>
+          <th scope="col" th:text="#{offer.list.table.price}"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr th:each="offer : ${offerList}">
+          <td th:text="${offer.title}"></td>
+          <td th:text="${offer.description}"></td>
+          <td th:text="${offer.price}"></td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>
+
+<footer th:replace="fragments/footer"/>
+</body>
+</html>
