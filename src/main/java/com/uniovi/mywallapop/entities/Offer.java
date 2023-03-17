@@ -15,6 +15,7 @@ public class Offer {
     private String date;
 
     private Double price;
+    private Boolean buyed = false;
 
     @ManyToOne
     private User user;
@@ -26,6 +27,13 @@ public class Offer {
     private Set<Conversation> conversations;
 
     public Offer() {
+    }
+
+    public Offer(String title, String description, Double price,String date) {
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.price = price;
     }
 
     public void setId(Long id) {
@@ -83,6 +91,22 @@ public class Offer {
 
     public void setBuyer(User buyer) {
         this.buyer = buyer;
+    }
+
+    public Boolean getBuyed() {
+        return buyed;
+    }
+
+    public void setBuyed(Boolean buyed) {
+        this.buyed = buyed;
+    }
+
+    public Set<Conversation> getConversations() {
+        return conversations;
+    }
+
+    public void setConversations(Set<Conversation> conversations) {
+        this.conversations = conversations;
     }
 }
 

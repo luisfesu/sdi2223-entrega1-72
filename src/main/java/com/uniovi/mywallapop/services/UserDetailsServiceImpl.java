@@ -3,24 +3,21 @@ package com.uniovi.mywallapop.services;
 import org.springframework.stereotype.Service;
 import com.uniovi.mywallapop.entities.User;
 import com.uniovi.mywallapop.repositories.UsersRepository;
-import com.uniovi.mywallapop.entities.User;
-import com.uniovi.mywallapop.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import  java.util.*;
 
 @Service("userDetailsService")
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl  implements UserDetailsService {
     @Autowired
     private UsersRepository usersRepository;
-
+    @Autowired RolesService rolesService;
 
     @Override
     public UserDetails loadUserByUsername(String dni) throws UsernameNotFoundException {
@@ -34,7 +31,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException(dni);
         }
         return new org.springframework.security.core.userdetails.User(
-
                 user.getEmail(), user.getPassword(), grantedAuthorities);
 
     }
