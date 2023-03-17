@@ -70,6 +70,24 @@ public class InsertSampleDataService {
         user12.setPassword("admin");
         user12.setRole(rolesService.getRoles()[1]);
 
+        // add users to repository
+
+
+        usersService.addUser(user1);
+        usersService.addUser(user2);
+        usersService.addUser(user2);
+        usersService.addUser(user3);
+        usersService.addUser(user4);
+        usersService.addUser(user5);
+        usersService.addUser(user6);
+        usersService.addUser(user7);
+        usersService.addUser(user8);
+        usersService.addUser(user9);
+        usersService.addUser(user10);
+        usersService.addUser(user11);
+
+        usersService.addUser(user12);
+
 
         Offer offer1 = new Offer("oferta 1", "esta es la oferta 1, del usuario 1",100.0, LocalDateTime.now().toString());
         Offer offer2 = new Offer("oferta 2", "esta es la oferta 2, del usuario 1",100.0, LocalDateTime.now().toString());
@@ -119,22 +137,6 @@ public class InsertSampleDataService {
         offersService.addOffer(offer13);
 
 
-        // add users to repository
 
-
-        usersService.addUser(user1);
-        usersService.addUser(user2);
-        usersService.addUser(user2);
-        usersService.addUser(user3);
-        usersService.addUser(user4);
-        usersService.addUser(user5);
-        usersService.addUser(user6);
-        usersService.addUser(user7);
-        usersService.addUser(user8);
-        usersService.addUser(user9);
-        usersService.addUser(user10);
-        usersService.addUser(user11);
-
-        usersService.addUser(user12);
     }
 }

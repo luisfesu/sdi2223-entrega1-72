@@ -15,31 +15,50 @@
         });
     </script>
     <div class="table-responsive">
-        <table class="table table-hover" th:fragment="tableUsers" id="tableUsers">
-            <thead>
-            <tr>
-                <th scope="col" th:text = "#{user.email}"></th>
-                <th scope="col" th:text = "#{user.name}"></th>
-                <th scope="col" th:text = "#{user.lastname}"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user : ${usersList}">
-                <td th:text="${user.email}"></td>
-                <td th:text="${user.name}"></td>
-                <td th:text="${user.lastName}"></td>
-              <!--  <td><a th:href="${'/admin/user/details/' + user.id}">#{user.det}</a></td>
-                <td><a th:href="${'/admin/user/edit/' + user.id}">#{user.mod}</a></td>-->
-                <td><a th:href="${'/admin/user/delete/' + user.id}" th:text = "#{user.del}"></a></td>
-            </tr>
-            </tbody>
-        </table>
+        <form th:action="@{/admin/user/deleteMultiple}" method="post" th:object="${usersToDelete}">
+            <table class="table table-hover" th:fragment="tableUsers" id="tableUsers">
+                <thead>
+                <tr>
+                    <th scope="col" th:text="#{user.email}"></th>
+                    <th scope="col" th:text="#{user.name}"></th>
+                    <th scope="col" th:text="#{user.lastname}"></th>
+                    <th scope="col"><input type="checkbox" class="form-check-input" id="selectAll" /></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${usersList}">
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td><input type="checkbox" class="form-check-input" name="usersToDelete" th:value="${user.id}" /></td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-danger" id="deleteButton" disabled="disabled" th:text="#{user.del}"></button>
+        </form>
     </div>
+    <script>
+        // Enable/disable the delete button based on the state of the checkboxes
+        $(document).ready(function() {
+            // Select all checkbox
+            $('#selectAll').change(function() {
+                $('input[name="usersToDelete"]').prop('checked', this.checked);
+                updateDeleteButton();
+            });
+
+            // Individual checkboxes
+            $('input[name="usersToDelete"]').change(function() {
+                updateDeleteButton();
+            });
+
+            // Update the delete button
+            function updateDeleteButton() {
+                var count = $('input[name="usersToDelete"]:checked').length;
+                $('#deleteButton').prop('disabled', count == 0);
+            }
+        });
+    </script>
+
     <div th:if="${#lists.isEmpty(usersList)}"> #{nousers} </div>
 </div>
 <footer th:replace="fragments/footer"/>
