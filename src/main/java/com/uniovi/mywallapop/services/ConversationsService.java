@@ -19,24 +19,23 @@ public class ConversationsService {
     private ConversationsRepository conversationsRepository;
 
     @Autowired
-    private MessagesRepository messagesRepository;
+    private MessagesService messagesService;
 
-
-
-    public List<Message> getMessages(User seller, User user, Offer offer) {
-        List<Message> messages = new ArrayList<>();
-        Conversation conversation = conversationsRepository.getConversationBySellerAndUser(seller, user, offer);
-        if(conversation == null){
-            createConversation(seller, user, offer);
-            return messages;
-        }
-
-        messages = messagesRepository.getMessagesByConversation(conversation);
-        return messages;
-    }
-
-    private void createConversation(User seller, User user, Offer offer) {
+    public Conversation createConversation(User seller, User user, Offer offer) {
         Conversation conversation = new Conversation(seller, user, offer);
         conversationsRepository.save(conversation);
+        return conversation;
+    }
+
+    public Conversation getConversationByUserSellerAndOffer(User seller, User user, Offer offer){
+        return conversationsRepository.getConversationBySellerAndUser(seller, user, offer);
+    }
+
+    public List<Conversation> getConversationsByUser(User user){
+        return conversationsRepository.getConversationByUser(user);
+    }
+
+    public Conversation getConversation(Long id) {
+        return conversationsRepository.findById(id).get();
     }
 }
