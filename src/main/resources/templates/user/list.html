@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/head"/>
+<body>
+<!-- Barra de Navegación superior -->
+<nav th:replace="fragments/nav"/>
+<div class="container" id="main-container">
+    <h2 th:text = "#{users}" ></h2>
+    <p th:text = "#{usersList}"></p>
+    <button type="button" id="updateButton" class="btn btn-primary" th:text = #{update} ></button>
+    <script>
+        $( "#updateButton" ).click(function() {
+            $("#tableUsers").load('/admin/user/list/update');
+        });
+    </script>
+    <div class="table-responsive">
+        <table class="table table-hover" th:fragment="tableUsers" id="tableUsers">
+            <thead>
+            <tr>
+                <th scope="col" th:text = "#{user.email}"></th>
+                <th scope="col" th:text = "#{user.name}"></th>
+                <th scope="col" th:text = "#{user.lastname}"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${usersList}">
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.lastName}"></td>
+              <!--  <td><a th:href="${'/admin/user/details/' + user.id}">#{user.det}</a></td>
+                <td><a th:href="${'/admin/user/edit/' + user.id}">#{user.mod}</a></td>-->
+                <td><a th:href="${'/admin/user/delete/' + user.id}" th:text = "#{user.del}"></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${#lists.isEmpty(usersList)}"> #{nousers} </div>
+</div>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>
