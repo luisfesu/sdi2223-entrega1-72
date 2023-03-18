@@ -22,7 +22,12 @@
                     <th scope="col" th:text="#{user.email}"></th>
                     <th scope="col" th:text="#{user.name}"></th>
                     <th scope="col" th:text="#{user.lastname}"></th>
-                    <th scope="col"><input type="checkbox" class="form-check-input" id="selectAll" /></th>
+                    <th scope="col">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="selectAll" />
+                            <label class="form-check-label" for="selectAll" th:text="#{user.selectAll}"></label>
+                        </div>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -30,7 +35,12 @@
                     <td th:text="${user.email}"></td>
                     <td th:text="${user.name}"></td>
                     <td th:text="${user.lastName}"></td>
-                    <td><input type="checkbox" class="form-check-input" name="usersToDelete" th:value="${user.id}" /></td>
+                    <td>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="usersToDelete" th:value="${user.id}" />
+                            <label class="form-check-label" th:text="#{user.select}"></label>
+                        </div>
+                    </td>
                 </tr>
                 </tbody>
             </table>
