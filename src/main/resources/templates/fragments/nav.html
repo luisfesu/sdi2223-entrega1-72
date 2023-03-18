@@ -20,26 +20,26 @@
             <!-- Menu de compra de Ofertas -->
             <li class="nav-item dropdown active" sec:authorize="hasRole('ROLE_USER')">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false"> Comprar
+                   aria-haspopup="true" aria-expanded="false" th:text="#{navbar.buy.label}"> Comprar
                 </a>
                 <!-- Sub-apartados del Menu -->
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/offer/search">      Buscar Ofertas     </a>
-                    <a class="dropdown-item" href="/offer/purchased">   Ofertas Compradas  </a>
-                    <a class="dropdown-item" href="#">                  Conversaciones     </a>
+                    <a class="dropdown-item" href="/offer/search" th:text="#{navbar.buy.search}">         Buscar Ofertas     </a>
+                    <a class="dropdown-item" href="/offer/purchased" th:text="#{navbar.buy.purchased}">   Ofertas Compradas  </a>
+                    <a class="dropdown-item" href="#" th:text="#{navbar.buy.conversations}">              Conversaciones     </a>
                 </div>
             </li>
 
             <!-- Menu de Ofertas Propias -->
             <li class="nav-item dropdown" >
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false"> Mis Ofertas
+                   aria-haspopup="true" aria-expanded="false" th:text="#{navbar.mine.label}"> Mis Ofertas
                 </a>
 
                 <!-- Sub-apartados del Menu -->
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/offer/add">     Crear Oferta     </a>
-                    <a class="dropdown-item" href="/offer/list">    Ver mis Ofertas  </a>
+                    <a class="dropdown-item" href="/offer/add" th:text="#{navbar.mine.add}">     Crear Oferta     </a>
+                    <a class="dropdown-item" href="/offer/list" th:text="#{navbar.mine.list}">    Ver mis Ofertas  </a>
                 </div>
             </li>
 
