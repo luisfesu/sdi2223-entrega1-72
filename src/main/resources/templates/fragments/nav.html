@@ -18,15 +18,15 @@
             </li>
 
             <!-- Menu de compra de Ofertas -->
-            <li class="nav-item dropdown active">
+            <li class="nav-item dropdown active" sec:authorize="hasRole('ROLE_USER')">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false"> Comprar
                 </a>
                 <!-- Sub-apartados del Menu -->
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#"> Buscar Ofertas     </a>
-                    <a class="dropdown-item" href="#"> Ofertas Compradas  </a>
-                    <a class="dropdown-item" href="#"> Conversaciones     </a>
+                    <a class="dropdown-item" href="/offer/search">      Buscar Ofertas     </a>
+                    <a class="dropdown-item" href="/offer/purchased">   Ofertas Compradas  </a>
+                    <a class="dropdown-item" href="#">                  Conversaciones     </a>
                 </div>
             </li>
 
@@ -38,8 +38,8 @@
 
                 <!-- Sub-apartados del Menu -->
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#"> Crear Oferta     </a>
-                    <a class="dropdown-item" href="#"> Ver mis Ofertas  </a>
+                    <a class="dropdown-item" href="/offer/add">     Crear Oferta     </a>
+                    <a class="dropdown-item" href="/offer/list">    Ver mis Ofertas  </a>
                 </div>
             </li>
 
@@ -55,7 +55,6 @@
 
         </ul>
 
-        <!--  TODO: Seguridad del menu -->
         <!-- Navbar Derecha: Login Signup y I18N-->
         <ul class="navbar-nav justify-content-end">
 
