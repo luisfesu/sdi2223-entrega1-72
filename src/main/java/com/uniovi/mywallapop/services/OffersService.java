@@ -48,4 +48,8 @@ public class OffersService {
     public List<Offer> getOffersByUser(User user) {
         return offersRepository.findAllByUser(user);
     }
+
+    public void deleteOffer(Long id) {
+        offersRepository.deleteById(id);
+    }
 }
