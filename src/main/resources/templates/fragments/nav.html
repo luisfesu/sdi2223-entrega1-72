@@ -31,11 +31,10 @@
             </li>
 
             <!-- Menu de Ofertas Propias -->
-            <li class="nav-item dropdown" >
+            <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_USER')">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false" th:text="#{navbar.mine.label}"> Mis Ofertas
                 </a>
-
                 <!-- Sub-apartados del Menu -->
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/offer/add" th:text="#{navbar.mine.add}">     Crear Oferta     </a>

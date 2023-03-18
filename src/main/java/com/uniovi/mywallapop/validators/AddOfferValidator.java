@@ -19,8 +19,12 @@ public class AddOfferValidator implements Validator {
 
         Offer offer = (Offer) target;
 
-        if(offer.getPrice() <= .00) {
-            errors.rejectValue("price", "error.addOffer.price");
+        if(offer.getPrice() == null) {
+            errors.rejectValue("price", "error.addOffer.price.empty");
+        } else {
+            if(offer.getPrice() <= .00) {
+                errors.rejectValue("price", "error.addOffer.price.value");
+            }
         }
 
         if(offer.getTitle().isBlank()) {
