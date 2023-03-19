@@ -1,6 +1,5 @@
 package com.uniovi.mywallapop.util;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
