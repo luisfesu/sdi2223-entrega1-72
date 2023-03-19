@@ -264,65 +264,6 @@ class MywallapopApplicationTests {
         Assertions.assertEquals(0, elements.size());
     }
 
-}
-
-package com.uniovi.mywallapop;
-
-import com.uniovi.mywallapop.pageobjects.*;
-import com.uniovi.mywallapop.util.SeleniumUtils;
-
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.swing.text.Utilities;
-import java.util.*;
-
-
-@SpringBootTest
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class MywallapopApplicationTests {
-
-    // Ruta de Firefox
-    static String PathFirefox = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-
-    // Ruta de Gecko Driver
-    static String Geckodriver = "C:\\Users\\mario\\Desktop\\Dev\\tools\\geckodriver-v0.30.0-win64.exe";
-
-    static WebDriver driver = getDriver(PathFirefox, Geckodriver);
-    static String URL = "http://localhost:8090";
-
-    public static WebDriver getDriver(String PathFirefox, String Geckodriver) {
-        System.setProperty("webdriver.firefox.bin", PathFirefox);
-        System.setProperty("webdriver.gecko.driver", Geckodriver);
-        driver = new FirefoxDriver();
-        return driver;
-    }
-
-    @BeforeEach
-    public void setUp(){
-        driver.navigate().to(URL);
-    }
-    //Después de cada prueba se borran las cookies del navegador
-    @AfterEach
-    public void tearDown(){
-        driver.manage().deleteAllCookies();
-    }
-    //Antes de la primera prueba
-    @BeforeAll
-    static public void begin() {}
-    //Al finalizar la última prueba
-    @AfterAll
-    static public void end() {
-        //Cerramos el navegador al finalizar las pruebas
-        driver.quit();
-    }
-
     @Test
     void PR22(){
         // Iniciamos sesión en la aplicación
@@ -530,8 +471,5 @@ class MywallapopApplicationTests {
 
         Assertions.assertEquals(1, elements.size());
     }
-
-
-
 
 }
