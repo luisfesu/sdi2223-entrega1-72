@@ -86,7 +86,7 @@ class MywallapopApplicationTests {
     @Order(3)
     void Prueba3(){
         PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
-        PO_SignUpView.fillSingupForm(driver,"test@mail.com","testaitor","testeable","test123","test1223");
+        PO_SignUpView.fillSingupForm(driver,"test2@mail.com","testaitor","testeable","test123","test1223");
         List<WebElement> elements = PO_View.checkElementBy(driver, "class", "text-danger");
         Assertions.assertEquals(1,elements.size());
 
