@@ -24,7 +24,7 @@
                 </a>
                 <!-- Sub-apartados del Menu -->
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/offer/search" th:text="#{navbar.buy.search}">         Buscar Ofertas     </a>
+                    <a class="dropdown-item" id="searchOffer" href="/offer/search" th:text="#{navbar.buy.search}">         Buscar Ofertas     </a>
                     <a class="dropdown-item" href="/offer/purchased" th:text="#{navbar.buy.purchased}">   Ofertas Compradas  </a>
                     <a class="dropdown-item" href="#" th:text="#{navbar.buy.conversations}">              Conversaciones     </a>
                 </div>
@@ -38,7 +38,7 @@
                 <!-- Sub-apartados del Menu -->
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" id="addOffer" href="/offer/add" th:text="#{navbar.mine.add}">     Crear Oferta     </a>
-                    <a class="dropdown-item" href="/offer/list" th:text="#{navbar.mine.list}">    Ver mis Ofertas  </a>
+                    <a class="dropdown-item" id="listOffers" href="/offer/list" th:text="#{navbar.mine.list}">    Ver mis Ofertas  </a>
                 </div>
             </li>
 

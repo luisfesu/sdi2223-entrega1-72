@@ -80,5 +80,20 @@ public class PO_NavView extends PO_View {
         By btn = By.className("btn");
         driver.findElement(btn).click();
     }
+
+    static public void fillSearchForm(WebDriver driver, String searchp) {
+        //Esperamos 5 segundo a que carge el DOM porque en algunos equipos falla
+        SeleniumUtils.waitSeconds(driver, 5);
+
+        // Rellenamos el campo búsqueda
+        WebElement title = driver.findElement(By.name("searchText"));
+        title.click();
+        title.clear();
+        title.sendKeys(searchp);
+
+        // Pulsamos el botón de envio
+        By btn = By.className("btn");
+        driver.findElement(btn).click();
+    }
 }
 
