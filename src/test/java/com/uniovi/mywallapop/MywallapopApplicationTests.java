@@ -402,6 +402,238 @@ class MywallapopApplicationTests {
     }
 
     @Test
+    @Order(20)
+    void Prueba20() {
+
+        // Iniciamos sesión en la aplicación
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "miguel@mail.com", "123456");
+
+        // Pinchamos en el menu de Mis Ofertas
+        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
+        elements.get(0).click();
+
+        // Pinchamos en la opción de Ver Mis Ofertas
+        elements = PO_View.checkElementBy(driver, "id", "searchOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
+        elements.get(0).click();
+
+        // Texto de la Oferta a buscar - Cadena Vacía
+        String checkText = "";
+
+        // Rellenamos el formulario de búsqueda
+        PO_NavView.fillSearchForm(driver, checkText);
+
+        // Comprobamos el primer elemento
+        SeleniumUtils.textIsPresentOnPage(driver, "test1"); // primera oferta en la aplicación
+
+        // Vamos a la ultima página, Comprobamos el último elemento
+        elements = PO_View.checkElementBy(driver, "free", "//a[contains(@class, 'page-link')]");
+        elements.get(3).click();
+        SeleniumUtils.textIsPresentOnPage(driver, "oferta 12"); // última oferta en la aplicación
+    }
+
+    @Test
+    @Order(21)
+    void Prueba21() {
+        // Iniciamos sesión en la aplicación
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "miguel@mail.com", "123456");
+
+        // Pinchamos en el menu de Mis Ofertas
+        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
+        elements.get(0).click();
+
+        // Pinchamos en la opción de Ver Mis Ofertas
+        elements = PO_View.checkElementBy(driver, "id", "searchOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
+        elements.get(0).click();
+
+        // Texto de la Oferta a buscar - Texto de Oferta inexistente
+        String checkText = "Esta oferta no existe en la aplicacion";
+
+        // Rellenamos el formulario de búsqueda
+        PO_NavView.fillSearchForm(driver, checkText);
+
+        // Obtener todos los elementos <td> dentro de un elemento <tr> (En este caso, no habrá ninguno)
+        //elements = PO_View.checkElementBy(driver, "free", "//*[@id='tableOffers']/tbody/tr/");
+        elements = driver.findElements(By.xpath("//*[@id='tableOffers']/tbody/tr"));
+
+        // Comprobar que no hay ningun elemento el el cuerpo de la tabla
+        Assertions.assertEquals(0, elements.size());
+    }
+
+    @Test
+    @Order(22)
+    void PR22(){
+        // Iniciamos sesión en la aplicación
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "miguel@mail.com", "123456");
+
+        // Pinchamos en el menu de Mis Ofertas
+        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
+        elements.get(0).click();
+
+        // Pinchamos en la opción de Ver Mis Ofertas
+        elements = PO_View.checkElementBy(driver, "id", "searchOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
+        elements.get(0).click();
+
+        elements = PO_View.checkElementBy(driver, "id", "buyButton18");
+        elements.get(0).click();
+
+        //List<WebElement> result = PO_View.checkElementBy(driver, "free", "//*[@id='tableOffers']/tbody/tr/td/div/a");
+        //Assertions.assertEquals("Comprada", result.get(0).getText());
+        SeleniumUtils.textIsPresentOnPage(driver,"Comprada");
+        SeleniumUtils.textIsPresentOnPage(driver,"1.0");
+
+    }
+
+    @Test
+    @Order(23)
+    void PR23(){
+        // Iniciamos sesión en la aplicación
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "user10@email.com", "user10");
+
+        // Pinchamos en el menu de Mis Ofertas
+        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
+        elements.get(0).click();
+
+        // Pinchamos en la opción de Ver Mis Ofertas
+        elements = PO_View.checkElementBy(driver, "id", "searchOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
+        elements.get(0).click();
+
+        elements = PO_View.checkElementBy(driver, "id", "buyButton19");
+        elements.get(0).click();
+
+        //List<WebElement> result = PO_View.checkElementBy(driver, "free", "//*[@id='tableOffers']/tbody/tr/td/div/a");
+        //Assertions.assertEquals("Comprada", result.get(0).getText());
+        //result = PO_View.checkElementBy(driver, "free", "//*[@id='tableOffers']/p");
+        //Assertions.assertEquals("0.0", result.get(0).getText());
+        SeleniumUtils.textIsPresentOnPage(driver,"Comprada");
+        SeleniumUtils.textIsPresentOnPage(driver,"0.0");
+
+    }
+
+    @Test
+    @Order(24)
+    void PR24(){
+        // Iniciamos sesión en la aplicación
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "user11@email.com", "user11");
+
+        // Pinchamos en el menu de Mis Ofertas
+        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
+        elements.get(0).click();
+
+        // Pinchamos en la opción de Ver Mis Ofertas
+        elements = PO_View.checkElementBy(driver, "id", "searchOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
+        elements.get(0).click();
+
+        elements = PO_View.checkElementBy(driver, "id", "buyButton20");
+        elements.get(0).click();
+
+        SeleniumUtils.textIsPresentOnPage(driver,"Error al realizar la compra");
+        SeleniumUtils.textIsPresentOnPage(driver,"100.0");
+    }
+
+    @Test
+    @Order(25)
+    void PR25(){
+        // Iniciamos sesión en la aplicación
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "user13@email.com", "user13");
+
+        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
+        elements.get(0).click();
+
+        elements = PO_View.checkElementBy(driver, "id", "purchasedOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
+        elements.get(0).click();
+
+        elements = driver.findElements(By.xpath("//*[@id='tablePurchased']/tbody/tr"));
+
+        // Comprobar que no hay ningun elemento el el cuerpo de la tabla
+        Assertions.assertEquals(0, elements.size());
+    }
+
+    @Test
+    @Order(26)
+    void PR26(){
+        // Iniciamos sesión en la aplicación
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "user13@email.com", "user13");
+
+        // Pinchamos en el menu de Mis Ofertas
+        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
+        elements.get(0).click();
+
+        // Pinchamos en la opción de Ver Mis Ofertas
+        elements = PO_View.checkElementBy(driver, "id", "searchOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
+        elements.get(0).click();
+
+        elements = PO_View.checkElementBy(driver, "id", "conversation2"); // etiqueta <a/> que redirecciona a la creación de ofertas
+        elements.get(0).click();
+
+        elements = driver.findElements(By.xpath("//*[@id='tableMessages']/tbody/tr"));
+
+        // Comprobar que no hay ningun elemento el el cuerpo de la tabla
+        Assertions.assertEquals(0, elements.size());
+
+        PO_PrivateView.sendMessage(driver, "Mensaje de prueba");
+
+        elements = driver.findElements(By.xpath("//*[@id='tableMessages']/tbody/tr"));
+
+        // Comprobar que no hay ningun elemento el el cuerpo de la tabla
+        Assertions.assertEquals(1, elements.size());
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", "Mensaje de prueba");
+        Assertions.assertEquals("Mensaje de prueba", result.get(0).getText());
+    }
+
+    @Test
+    @Order(27)
+    void PR27(){
+        // Iniciamos sesión en la aplicación
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "user13@email.com", "user13");
+
+        // Pinchamos en el menu de Mis Ofertas
+        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
+        elements.get(0).click();
+
+        // Pinchamos en la opción de Ver Mis Ofertas
+        elements = PO_View.checkElementBy(driver, "id", "searchOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
+        elements.get(0).click();
+
+        elements = PO_View.checkElementBy(driver, "id", "conversation2"); // etiqueta <a/> que redirecciona a la creación de ofertas
+        elements.get(0).click();
+
+        elements = driver.findElements(By.xpath("//*[@id='tableMessages']/tbody/tr"));
+
+        // Comprobar que no hay ningun elemento el el cuerpo de la tabla
+        Assertions.assertEquals(1, elements.size());
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", "Mensaje de prueba");
+        Assertions.assertEquals("Mensaje de prueba", result.get(0).getText());
+    }
+
+    @Test
+    @Order(28)
+    void PR28(){
+        // Iniciamos sesión en la aplicación
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "user13@email.com", "user13");
+
+        // Pinchamos en el menu de Mis Ofertas
+        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
+        elements.get(0).click();
+
+        // Pinchamos en la opción de Ver Mis Ofertas
+        elements = PO_View.checkElementBy(driver, "id", "conversations"); // etiqueta <a/> que redirecciona a la creación de ofertas
+        elements.get(0).click();
+
+        elements = driver.findElements(By.xpath("//*[@id='tableConversations']/tbody/tr"));
+
+        Assertions.assertEquals(1, elements.size());
+    }
+
+    @Test
     @Order(29)
     void Prueba29() {
         // PAGINA 1: Comprobamos que se puede internacionalizar el Index (Home):
@@ -496,231 +728,6 @@ class MywallapopApplicationTests {
                 PO_View.getP().getString("offer.search.table.price", PO_Properties.getENGLISH()), PO_View.getTimeout());
         Assertions.assertEquals(elements.get(0).getText(), "Price");
 
-    }
-
-    @Test
-    @Order(20)
-    void Prueba20() {
-
-        // Iniciamos sesión en la aplicación
-        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
-        PO_LoginView.fillLoginForm(driver, "miguel@mail.com", "123456");
-
-        // Pinchamos en el menu de Mis Ofertas
-        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
-        elements.get(0).click();
-
-        // Pinchamos en la opción de Ver Mis Ofertas
-        elements = PO_View.checkElementBy(driver, "id", "searchOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
-        elements.get(0).click();
-
-        // Texto de la Oferta a buscar - Cadena Vacía
-        String checkText = "";
-
-        // Rellenamos el formulario de búsqueda
-        PO_NavView.fillSearchForm(driver, checkText);
-
-        // Comprobamos el primer elemento
-        SeleniumUtils.textIsPresentOnPage(driver, "oferta 1"); // primera oferta en la aplicación
-
-        // Vamos a la ultima página, Comprobamos el último elemento
-        elements = PO_View.checkElementBy(driver, "free", "//a[contains(@class, 'page-link')]");
-        elements.get(3).click();
-        SeleniumUtils.textIsPresentOnPage(driver, "oferta 12"); // última oferta en la aplicación
-    }
-
-    @Test
-    @Order(21)
-    void Prueba21() {
-        // Iniciamos sesión en la aplicación
-        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
-        PO_LoginView.fillLoginForm(driver, "miguel@mail.com", "123456");
-
-        // Pinchamos en el menu de Mis Ofertas
-        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
-        elements.get(0).click();
-
-        // Pinchamos en la opción de Ver Mis Ofertas
-        elements = PO_View.checkElementBy(driver, "id", "searchOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
-        elements.get(0).click();
-
-        // Texto de la Oferta a buscar - Texto de Oferta inexistente
-        String checkText = "Esta oferta no existe en la aplicacion";
-
-        // Rellenamos el formulario de búsqueda
-        PO_NavView.fillSearchForm(driver, checkText);
-
-        // Obtener todos los elementos <td> dentro de un elemento <tr> (En este caso, no habrá ninguno)
-        //elements = PO_View.checkElementBy(driver, "free", "//*[@id='tableOffers']/tbody/tr/");
-        elements = driver.findElements(By.xpath("//*[@id='tableOffers']/tbody/tr"));
-
-        // Comprobar que no hay ningun elemento el el cuerpo de la tabla
-        Assertions.assertEquals(0, elements.size());
-    }
-
-    @Test
-    void PR22(){
-        // Iniciamos sesión en la aplicación
-        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
-        PO_LoginView.fillLoginForm(driver, "miguel@mail.com", "123456");
-
-        // Pinchamos en el menu de Mis Ofertas
-        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
-        elements.get(0).click();
-
-        // Pinchamos en la opción de Ver Mis Ofertas
-        elements = PO_View.checkElementBy(driver, "id", "searchOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
-        elements.get(0).click();
-
-        elements = PO_View.checkElementBy(driver, "id", "buyButton2");
-        elements.get(0).click();
-
-        List<WebElement> result = PO_View.checkElementBy(driver, "free", "//*[@id='tableOffers']/tbody/tr/td/div/a");
-        Assertions.assertEquals("Comprada", result.get(0).getText());
-        result = PO_View.checkElementBy(driver, "text", "1.0");
-        Assertions.assertEquals("1.0", result.get(0).getText());
-
-    }
-
-    @Test
-    void PR23(){
-        // Iniciamos sesión en la aplicación
-        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
-        PO_LoginView.fillLoginForm(driver, "user03@email.com", "user03");
-
-        // Pinchamos en el menu de Mis Ofertas
-        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
-        elements.get(0).click();
-
-        // Pinchamos en la opción de Ver Mis Ofertas
-        elements = PO_View.checkElementBy(driver, "id", "searchOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
-        elements.get(0).click();
-
-        elements = PO_View.checkElementBy(driver, "id", "buyButton3");
-        elements.get(0).click();
-
-        List<WebElement> result = PO_View.checkElementBy(driver, "free", "//*[@id='tableOffers']/tbody/tr/td/div/a");
-        Assertions.assertEquals("Comprada", result.get(0).getText());
-        result = PO_View.checkElementBy(driver, "free", "//*[@id='tableOffers']/p");
-        Assertions.assertEquals("0.0", result.get(0).getText());
-
-    }
-
-    @Test
-    void PR24(){
-        // Iniciamos sesión en la aplicación
-        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
-        PO_LoginView.fillLoginForm(driver, "user04@email.com", "user04");
-
-        // Pinchamos en el menu de Mis Ofertas
-        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
-        elements.get(0).click();
-
-        // Pinchamos en la opción de Ver Mis Ofertas
-        elements = PO_View.checkElementBy(driver, "id", "searchOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
-        elements.get(0).click();
-
-        elements = PO_View.checkElementBy(driver, "id", "buyButton4");
-        elements.get(0).click();
-
-        List<WebElement> result = PO_View.checkElementBy(driver, "free", "//*[@id='tableOffers']/span");
-        Assertions.assertEquals("Error al realizar la compra", result.get(0).getText());
-        result = PO_View.checkElementBy(driver, "text", "100.0");
-        Assertions.assertEquals("100.0", result.get(0).getText());
-    }
-
-    @Test
-    void PR25(){
-        // Iniciamos sesión en la aplicación
-        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
-        PO_LoginView.fillLoginForm(driver, "user02@email.com", "user02");
-
-        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
-        elements.get(0).click();
-
-        elements = PO_View.checkElementBy(driver, "id", "purchasedOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
-        elements.get(0).click();
-
-        elements = driver.findElements(By.xpath("//*[@id='tablePurchased']/tbody/tr"));
-
-        // Comprobar que no hay ningun elemento el el cuerpo de la tabla
-        Assertions.assertEquals(1, elements.size());
-    }
-
-    @Test
-    void PR26(){
-        // Iniciamos sesión en la aplicación
-        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
-        PO_LoginView.fillLoginForm(driver, "user02@email.com", "user02");
-
-        // Pinchamos en el menu de Mis Ofertas
-        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
-        elements.get(0).click();
-
-        // Pinchamos en la opción de Ver Mis Ofertas
-        elements = PO_View.checkElementBy(driver, "id", "searchOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
-        elements.get(0).click();
-
-        elements = PO_View.checkElementBy(driver, "id", "conversation2"); // etiqueta <a/> que redirecciona a la creación de ofertas
-        elements.get(0).click();
-
-        elements = driver.findElements(By.xpath("//*[@id='tableMessages']/tbody/tr"));
-
-        // Comprobar que no hay ningun elemento el el cuerpo de la tabla
-        Assertions.assertEquals(0, elements.size());
-
-        PO_PrivateView.sendMessage(driver, "Mensaje de prueba");
-
-        elements = driver.findElements(By.xpath("//*[@id='tableMessages']/tbody/tr"));
-
-        // Comprobar que no hay ningun elemento el el cuerpo de la tabla
-        Assertions.assertEquals(1, elements.size());
-        List<WebElement> result = PO_View.checkElementBy(driver, "text", "Mensaje de prueba");
-        Assertions.assertEquals("Mensaje de prueba", result.get(0).getText());
-    }
-
-    @Test
-    void PR27(){
-        // Iniciamos sesión en la aplicación
-        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
-        PO_LoginView.fillLoginForm(driver, "user02@email.com", "user02");
-
-        // Pinchamos en el menu de Mis Ofertas
-        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
-        elements.get(0).click();
-
-        // Pinchamos en la opción de Ver Mis Ofertas
-        elements = PO_View.checkElementBy(driver, "id", "searchOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
-        elements.get(0).click();
-
-        elements = PO_View.checkElementBy(driver, "id", "conversation2"); // etiqueta <a/> que redirecciona a la creación de ofertas
-        elements.get(0).click();
-
-        elements = driver.findElements(By.xpath("//*[@id='tableMessages']/tbody/tr"));
-
-        // Comprobar que no hay ningun elemento el el cuerpo de la tabla
-        Assertions.assertEquals(1, elements.size());
-        List<WebElement> result = PO_View.checkElementBy(driver, "text", "Mensaje de prueba");
-        Assertions.assertEquals("Mensaje de prueba", result.get(0).getText());
-    }
-
-    @Test
-    void PR28(){
-        // Iniciamos sesión en la aplicación
-        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
-        PO_LoginView.fillLoginForm(driver, "user02@email.com", "user02");
-
-        // Pinchamos en el menu de Mis Ofertas
-        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
-        elements.get(0).click();
-
-        // Pinchamos en la opción de Ver Mis Ofertas
-        elements = PO_View.checkElementBy(driver, "id", "conversations"); // etiqueta <a/> que redirecciona a la creación de ofertas
-        elements.get(0).click();
-
-        elements = driver.findElements(By.xpath("//*[@id='tableConversations']/tbody/tr"));
-
-        Assertions.assertEquals(1, elements.size());
     }
 
 }
