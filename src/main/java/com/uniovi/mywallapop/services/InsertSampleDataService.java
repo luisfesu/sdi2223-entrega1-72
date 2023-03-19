@@ -71,10 +71,7 @@ public class InsertSampleDataService {
         user12.setRole(rolesService.getRoles()[1]);
 
         // add users to repository
-
-
         usersService.addUser(user1);
-        usersService.addUser(user2);
         usersService.addUser(user2);
         usersService.addUser(user3);
         usersService.addUser(user4);
@@ -85,10 +82,9 @@ public class InsertSampleDataService {
         usersService.addUser(user9);
         usersService.addUser(user10);
         usersService.addUser(user11);
-
         usersService.addUser(user12);
 
-
+    // Creamos las oferas
         Offer offer1 = new Offer("oferta 1", "esta es la oferta 1, del usuario 1",100.0, LocalDateTime.now().toString());
         Offer offer2 = new Offer("oferta 2", "esta es la oferta 2, del usuario 1",100.0, LocalDateTime.now().toString());
         Offer offer3 = new Offer("oferta 3", "esta es la oferta 3, del usuario 1",100.0, LocalDateTime.now().toString());
@@ -120,8 +116,7 @@ public class InsertSampleDataService {
         offer12.setUser(user2);
         offer13.setUser(user2);
 
-
-
+        // Añadimos las ofertas con el Servicio
         offersService.addOffer(offer1);
         offersService.addOffer(offer2);
         offersService.addOffer(offer3);
@@ -135,8 +130,6 @@ public class InsertSampleDataService {
         offersService.addOffer(offer11);
         offersService.addOffer(offer12);
         offersService.addOffer(offer13);
-
-
 
     }
 }
