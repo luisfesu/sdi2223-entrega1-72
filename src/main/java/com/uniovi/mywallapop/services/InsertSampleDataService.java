@@ -21,6 +21,40 @@ public class InsertSampleDataService {
     }
 
     private void insertSampleData() {
+       User admin = new User("admin@email.com", "admin", "admin");
+       admin.setPassword("admin");
+       admin.setRole(rolesService.getRoles()[1]);
+       User user;
+       Offer offer1;
+       Offer offer2;
+       Offer offer3;
+       for(int i = 1 ; i <= 15; i++){
+           String email, name;
+           if(i < 10){
+               email = "user0" + i + "@email.com";
+               name = "user0" + i;
+           }
+           else{
+               email = "user" + i + "@email.com";
+               name = "user" + i;
+           }
+           user = new User(email, name, name);
+           user.setPassword(name);
+           user.setRole(rolesService.getRoles()[0]);
+           usersService.addUser(user);
+           for(int j = 1; j <= 5; j++){
+               offer1 = new Offer("test" + j, "usuario" + i, 99.0, "test" + j);
+               offer2 = new Offer("test" + j, "usuario" + i, 100.0, "test" + j);
+               offer3 = new Offer("test" + j, "usuario" + i, 101.0, "test" + j);
+               offer1.setUser(user);
+               offer2.setUser(user);
+               offer3.setUser(user);
+               offersService.addOffer(offer1);
+               offersService.addOffer(offer2);
+               offersService.addOffer(offer3);
+           }
+       }
+
         // create users
         User user1 = new User("pedro@mail.com", "Pedro", "Díaz");
         user1.setPassword("123456");
@@ -70,7 +104,6 @@ public class InsertSampleDataService {
         user12.setPassword("admin");
         user12.setRole(rolesService.getRoles()[1]);
 
-        // add users to repository
         usersService.addUser(user1);
         usersService.addUser(user2);
         usersService.addUser(user3);
@@ -84,10 +117,10 @@ public class InsertSampleDataService {
         usersService.addUser(user11);
         usersService.addUser(user12);
 
-    // Creamos las oferas
-        Offer offer1 = new Offer("oferta 1", "esta es la oferta 1, del usuario 1",100.0, LocalDateTime.now().toString());
-        Offer offer2 = new Offer("oferta 2", "esta es la oferta 2, del usuario 1",100.0, LocalDateTime.now().toString());
-        Offer offer3 = new Offer("oferta 3", "esta es la oferta 3, del usuario 1",100.0, LocalDateTime.now().toString());
+        // Creamos las oferas
+        Offer offer100 = new Offer("oferta 1", "esta es la oferta 1, del usuario 1",100.0, LocalDateTime.now().toString());
+        Offer offer20 = new Offer("oferta 2", "esta es la oferta 2, del usuario 1",100.0, LocalDateTime.now().toString());
+        Offer offer30 = new Offer("oferta 3", "esta es la oferta 3, del usuario 1",100.0, LocalDateTime.now().toString());
         Offer offer4 = new Offer("oferta 4", "esta es la oferta 4, del usuario 2",100.0, LocalDateTime.now().toString());
         Offer offer5 = new Offer("oferta 5", "esta es la oferta 5, del usuario 2",100.0, LocalDateTime.now().toString());
         Offer offer6 = new Offer("oferta 6", "esta es la oferta 6, del usuario 2",100.0, LocalDateTime.now().toString());
@@ -100,9 +133,9 @@ public class InsertSampleDataService {
         Offer offer13 = new Offer("oferta 13", "esta es la oferta 13, del usuario 2",100.0, LocalDateTime.now().toString());
 
         // Tres ofertas del usuario 1
-        offer1.setUser(user1);
-        offer2.setUser(user1);
-        offer3.setUser(user1);
+        offer100.setUser(user1);
+        offer20.setUser(user1);
+        offer30.setUser(user1);
 
         // 10 ofertas del usuario 2
         offer4.setUser(user2);
@@ -117,9 +150,9 @@ public class InsertSampleDataService {
         offer13.setUser(user2);
 
         // Añadimos las ofertas con el Servicio
-        offersService.addOffer(offer1);
-        offersService.addOffer(offer2);
-        offersService.addOffer(offer3);
+        offersService.addOffer(offer100);
+        offersService.addOffer(offer20);
+        offersService.addOffer(offer30);
         offersService.addOffer(offer4);
         offersService.addOffer(offer5);
         offersService.addOffer(offer6);

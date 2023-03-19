@@ -10,7 +10,8 @@
 
 <div class="container" id="main-container">
     <h2 th:text="#{offer.search.h2}"></h2>
-    <p th:text="#{offer.search.money}">:<p th:fragment="money" id="money" th:text="${user.money}"></p></p>
+    <p th:text="#{offer.search.money}"></p>
+    <p th:fragment="tableOffers" th:text="${user.money}"></p>
     <!-- Formulario de Búsqueda-->
     <form class="form-inline" action="/offer/search">
         <div class="form-group">
@@ -59,14 +60,7 @@
                 </tr>
             </tbody>
         </table>
-        <!--
-        <span class="text-danger" th:if="${#fields.hasErrors('price')}"
-              th:errors="*{price}"></span>
-        <span class="text-danger" th:if="${#fields.hasErrors('buyed')}"
-              th:errors="*{buyed}"></span>
-        <span class="text-danger" th:if="${#fields.hasErrors('user')}"
-              th:errors="*{user}"></span>
-              -->
+        <span id="errorPrecio" class="text-danger" th:fragment="tableOffers" th:if="${buyError}" th:text="#{all.offer.errorbuy}">Tu dinero debe ser superior al precio</span>
     </div>
     <footer th:replace="fragments/pagination"/>
 </div>

@@ -5,6 +5,17 @@
 <body>
 <nav th:replace="fragments/nav"/>
 <div class="container" id="main-container">
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    setInterval(function() {
+
+        let numberPage = [[${conversation.id}]];
+        let urlUpdate = '/conversation/details/' + numberPage + 'update';
+        $("#tableMarks").load(urlUpdate);
+
+    }, 2000);
+    /*]]>*/
+  </script>
   <h2 th:text="#{conversation.list.table.title}">Conversación</h2>
   <p th:text="${offer.title}"></p>
   <div class="table-responsive">

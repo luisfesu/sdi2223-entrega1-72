@@ -30,8 +30,7 @@ public class OffersController {
     @Autowired
     private AddOfferValidator addOfferValidator;
 
-    @Autowired
-    private BuyOfferValidator buyOfferValidator;
+    private boolean invalidBuy = false;
 
 
     @RequestMapping(value = "/offer/add")
@@ -82,7 +81,6 @@ public class OffersController {
         Page<Offer> offers;
         String currentUserMail = principal.getName();
         User user = usersService.getUserByEmail(currentUserMail);
-
         if(searchText != null && !searchText.isEmpty()) {
             offers = offersService.searchOfferByTitle(pageable, searchText);
         } else {
@@ -92,6 +90,7 @@ public class OffersController {
         model.addAttribute("offerList", offers.getContent()); // Lista de ofertas
         model.addAttribute("page", offers); // Pagina
         model.addAttribute("user", user);
+        model.addAttribute("buyError", invalidBuy);
         return "offer/search";
     }
 
@@ -123,36 +122,29 @@ public class OffersController {
     }
 
     @RequestMapping("/offer/buy/{id}")
-    public String buyOffer(@ModelAttribute Offer ofer, BindingResult result, Model model, Pageable pageable,
-                           @PathVariable Long id, Principal principal){
+    public String buyOffer(Model model, @PathVariable Long id, Principal principal){
         String email = principal.getName();
         User user = usersService.getUserByEmail(email);
 
         Offer offer = offersService.getOffer(id);
 
-        List<Object> target = new ArrayList<>();
-        target.add(offer);
-        target.add(user);
-        buyOfferValidator.validate(target, result);
-
-        if(result.hasErrors()){
-            Page<Offer> offers = offersService.getAllOffers(pageable);
-            model.addAttribute("offerList", offers.getContent());
-            model.addAttribute("page", offers);
-            return "offer/search";
+        invalidBuy = offersService.checkInvalidBuy(offer, user);
+        if(!invalidBuy){
+            offersService.buyOffer(offer, user);
+            usersService.decreaseMoney(user, offer.getPrice());
         }
-
-        offersService.buyOffer(offer, user);
-        usersService.decreaseMoney(user, offer.getPrice());
 
         return "redirect:/offer/search";
     }
 
     @RequestMapping("/offer/search/update")
     public String updateList(Model model, Pageable pageable, Principal principal){
+        String currentUserMail = principal.getName();
+        User user = usersService.getUserByEmail(currentUserMail);
         Page<Offer> offers = offersService.getAllOffers(pageable);
         model.addAttribute("offerList", offers.getContent());
-        model.addAttribute("page", offers);
+        model.addAttribute("buyError", invalidBuy);
+        model.addAttribute("user", user);
         return "offer/search :: tableOffers";
     }
 }

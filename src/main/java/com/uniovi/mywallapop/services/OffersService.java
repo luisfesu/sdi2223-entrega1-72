@@ -57,4 +57,17 @@ public class OffersService {
     public void buyOffer(Offer offer, User user) {
         offersRepository.updatePurchased(offer.getId(), user);
     }
+
+    public boolean checkInvalidBuy(Offer offer, User user) {
+        if(offer.getUser().equals(user)){
+            return true;
+        }
+        else if(offer.getPrice() > user.getMoney()){
+            return true;
+        }
+        else if(offer.getBuyed()){
+            return true;
+        }
+        return false;
+    }
 }

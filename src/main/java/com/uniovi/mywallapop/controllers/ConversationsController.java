@@ -48,6 +48,10 @@ public class ConversationsController {
         String email = principal.getName();
         User user = usersService.getUserByEmail(email);
 
+        if(seller.equals(user)){
+            return "redirect:/offer/search";
+        }
+
         Conversation conversation = conversationsService.getConversationByUserSellerAndOffer(seller, user, offer);
 
         if(conversation != null){
@@ -74,10 +78,17 @@ public class ConversationsController {
             return "conversation/messages";
         }
 
+
         User user = usersService.getUserByEmail(principal.getName());
 
+
         Conversation conversation = conversationsService.getConversation(id);
-        messagesService.addMessage(conversation,user, message.getText());
+
+        if(user.equals(conversation.getUserA()) || user.equals(conversation.getUserB())){
+            messagesService.addMessage(conversation,user, message.getText());
+
+            return "redirect:/conversation/details/" + conversation.getId();
+        }
 
         return "redirect:/conversation/details/" + conversation.getId();
     }
