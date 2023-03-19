@@ -5,7 +5,7 @@
 <nav th:replace="fragments/nav"/>
 
     <div class="container" id="main-container">
-        <h2>Crea una nueva oferta</h2>
+        <h2 th:text="#{offer.add.h2}"></h2>
 
         <form class="form-horizontal" method="post" action="/offer/add" th:object="${offer}">
             <div class="form-group">
