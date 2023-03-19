@@ -60,7 +60,46 @@ class MywallapopApplicationTests {
     @Test
     void contextLoads() {
     }
+    @Test
+    @Order(1)
+    void Prueba1(){
+        PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+        PO_SignUpView.fillSingupForm(driver,"test@mail.com","testaitor","testeable","test123","test123");
+        List<WebElement> elements = PO_View.checkElementBy(driver, "id", "home");
+        elements.get(0).click();
+        elements = PO_View.checkElementBy(driver, "id", "logout");
+        elements.get(0).click();
+        PO_LoginView.fillLoginForm(driver,"test@mail.com","test123");
+        elements = PO_View.checkElementBy(driver, "id", "home");
+        elements.get(0).click();
+    }
+    @Test
+    @Order(2)
+    void Prueba2(){
+        PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+        PO_SignUpView.fillSingupForm(driver,"","","","test123","test123");
+        List<WebElement> elements = PO_View.checkElementBy(driver, "class", "text-danger");
+        Assertions.assertEquals(3,elements.size());
 
+    }
+    @Test
+    @Order(3)
+    void Prueba3(){
+        PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+        PO_SignUpView.fillSingupForm(driver,"test@mail.com","testaitor","testeable","test123","test1223");
+        List<WebElement> elements = PO_View.checkElementBy(driver, "class", "text-danger");
+        Assertions.assertEquals(1,elements.size());
+
+    }
+    @Test
+    @Order(4)
+    void Prueba4(){
+        PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+        PO_SignUpView.fillSingupForm(driver,"admin@email.com","testaitor","testeable","test123","test123");
+        List<WebElement> elements = PO_View.checkElementBy(driver, "class", "text-danger");
+        Assertions.assertEquals(1,elements.size());
+
+    }
     @Test
     @Order(15)
     void Prueba15 () {
@@ -88,19 +127,7 @@ class MywallapopApplicationTests {
         // Comprobamos que el texto de la nueva oferta está presente en la pagina
         SeleniumUtils.textIsPresentOnPage(driver, titleTest);
     }
-    @Test
-    @Order(1)
-    void Prueba1(){
-        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
-        PO_SignUpView.fillLoginForm(driver,"test@mail.com","test","testeable","test123","test123");
-        List<WebElement> elements = PO_View.checkElementByKey(driver,"home",0 ); // //li/a
-        elements.get(0).click();
-        elements = PO_View.checkElementBy(driver, "id", "logout"); // //li/a
-        elements.get(0).click();
-        PO_Login.fillLoginForm(driver,"test@mail.com","test123");
-        elements = PO_View.checkElementByKey(driver,"home",0 ); // //li/a
-        elements.get(0).click();
-    }
+
     @Test
     @Order(16)
     void Prueba16() {
