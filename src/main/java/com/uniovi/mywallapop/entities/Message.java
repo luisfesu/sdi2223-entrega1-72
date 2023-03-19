@@ -1,6 +1,7 @@
 package com.uniovi.mywallapop.entities;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "message")
@@ -21,6 +22,13 @@ public class Message {
     private String date;
 
     public Message() {}
+
+    public Message(User user, Conversation conversation, String text, String date) {
+        this.user = user;
+        this.conversation = conversation;
+        this.text = text;
+        this.date = date;
+    }
 
     public Long getId() {
         return id;
