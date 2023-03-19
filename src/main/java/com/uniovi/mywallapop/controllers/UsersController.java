@@ -54,7 +54,6 @@ public class UsersController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();
         User activeUser = usersService.getUserByEmail(email);
-        //model.addAttribute("markList", activeUser.getMarks());
         return "home";
     }
 }
