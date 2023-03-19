@@ -1,7 +1,10 @@
 package com.uniovi.mywallapop;
 
+import com.uniovi.mywallapop.entities.User;
 import com.uniovi.mywallapop.pageobjects.*;
+import com.uniovi.mywallapop.services.UsersService;
 import com.uniovi.mywallapop.util.SeleniumUtils;
+import com.uniovi.mywallapop.services.UsersService;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Test;
@@ -10,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.swing.text.Element;
@@ -20,7 +24,8 @@ import java.util.*;
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class MywallapopApplicationTests {
-
+    @Autowired
+    private UsersService usersService;
     // Ruta de Firefox
     static String PathFirefox = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
 
@@ -146,7 +151,125 @@ class MywallapopApplicationTests {
 
         Assertions.assertEquals(elements.isEmpty(), false);
     }
+    @Test
+    @Order(9)
+    void Prueba9(){
+        Prueba6();
+        List<WebElement> elements = PO_NavView.checkElementBy(driver,"id","logout");
+        elements.get(0).click();
 
+        SeleniumUtils.waitLoadElementsBy(driver,"id","username",1);
+    }
+    @Test
+    @Order(10)
+    void Prueba10(){
+
+       // SeleniumUtils.waitLoadElementsBy(driver,"id","username",1);
+        SeleniumUtils.waitSeconds(driver,1);
+        List<WebElement> elements = driver.findElements(By.id("logout"));
+       // PO_NavView.checkElementBy(driver,"id","logout");
+        Assertions.assertEquals(0, elements.size());
+    }
+    @Test
+    @Order(11)
+    void Prueba11(){
+        Prueba5();
+        List<WebElement> elements =PO_NavView.checkElementBy(driver,"id","adminDropdown");
+        elements.get(0).click();
+        elements =PO_NavView.checkElementBy(driver,"id","adminUserListDropdown");
+        elements.get(0).click();
+        //elements =PO_NavView.checkElementBy(driver,"xpath","/html/body/nav/div/ul[1]/li[2]/div/a");
+      //  elements.get(0).click();
+        elements =PO_NavView.checkElementBy(driver,"free","/html/body/div/div/form/table/tbody/*/td[1]");
+        //elements =PO_NavView.checkElementBy(driver,"name","email");
+        List<User> list = usersService.getUsers();
+        for (WebElement e:elements) {
+           Assertions.assertTrue(list.stream().anyMatch(user -> e.getText().equals(user.getEmail())));
+        }
+
+    }
+
+    List<WebElement> checkBoxes(int[] nums){
+        List<WebElement> elements = new ArrayList<WebElement>();
+        for (int n:nums) {
+            elements.addAll(PO_NavView.checkElementBy(driver,"free"
+                    ,"/html/body/div/div/form/table/tbody/tr["+n+"]/td[4]/div/input"));
+
+        }
+
+        return  elements;
+    }
+    @Test
+    @Order(12)
+    void Prueba12(){
+        Prueba5();
+        int sizePreDelete = usersService.getUsers().size();
+        List<WebElement> elements =PO_NavView.checkElementBy(driver,"id","adminDropdown");
+        elements.get(0).click();
+        elements =PO_NavView.checkElementBy(driver,"id","adminUserListDropdown");
+        elements.get(0).click();
+        int[] temp = {1};
+        elements = checkBoxes(temp);
+        elements.stream().forEach(webElement -> webElement.click());
+        elements =PO_NavView.checkElementBy(driver,"id",  "deleteButton");
+        elements.get(0).click();
+        int sizePostDelete = usersService.getUsers().size();
+
+        Assertions.assertEquals(sizePreDelete-1,sizePostDelete);
+        elements =PO_NavView.checkElementBy(driver,"free","/html/body/div/div/form/table/tbody/*/td[1]");
+        Assertions.assertEquals(sizePostDelete,elements.size());
+
+    }
+    @Test
+    @Order(13)
+    void Prueba13(){
+        Prueba5();
+        int sizePreDelete = usersService.getUsers().size();
+        List<WebElement> elements =PO_NavView.checkElementBy(driver,"id","adminDropdown");
+        elements.get(0).click();
+        elements =PO_NavView.checkElementBy(driver,"id","adminUserListDropdown");
+        elements.get(0).click();
+
+        elements =PO_NavView.checkElementBy(driver,"free","/html/body/div/div/form/table/tbody/*/td[1]");
+
+        int[] temp = {elements.size()};
+
+        elements = checkBoxes(temp);
+        elements.stream().forEach(webElement -> webElement.click());
+        elements =PO_NavView.checkElementBy(driver,"id",  "deleteButton");
+        elements.get(0).click();
+        int sizePostDelete = usersService.getUsers().size();
+        //SeleniumUtils.waitSeconds(driver,5);
+        Assertions.assertEquals(sizePreDelete-1,sizePostDelete);
+        elements =PO_NavView.checkElementBy(driver,"free","/html/body/div/div/form/table/tbody/*/td[1]");
+        Assertions.assertEquals(sizePostDelete,elements.size());
+
+    }
+
+    @Test
+    @Order(14)
+    void Prueba14(){
+        Prueba5();
+        int sizePreDelete = usersService.getUsers().size();
+        List<WebElement> elements =PO_NavView.checkElementBy(driver,"id","adminDropdown");
+        elements.get(0).click();
+        elements =PO_NavView.checkElementBy(driver,"id","adminUserListDropdown");
+        elements.get(0).click();
+
+        elements =PO_NavView.checkElementBy(driver,"free","/html/body/div/div/form/table/tbody/*/td[1]");
+
+        int[] temp = {2,4,7};
+        elements = checkBoxes(temp);
+        elements.stream().forEach(webElement -> webElement.click());
+        elements =PO_NavView.checkElementBy(driver,"id",  "deleteButton");
+        elements.get(0).click();
+        int sizePostDelete = usersService.getUsers().size();
+
+        Assertions.assertEquals(sizePreDelete-3,sizePostDelete);
+        elements =PO_NavView.checkElementBy(driver,"free","/html/body/div/div/form/table/tbody/*/td[1]");
+        Assertions.assertEquals(sizePostDelete,elements.size());
+
+    }
     @Test
     @Order(15)
     void Prueba15 () {

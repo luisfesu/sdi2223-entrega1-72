@@ -48,7 +48,7 @@
                    aria-haspopup="true" aria-expanded="false"  th:text= "#{adminMenu}" >
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item"  sec:authorize="hasRole('ROLE_ADMIN')" href="/admin/user/list" th:text="#{adminUserList}"></a>
+                    <a class="dropdown-item"  sec:authorize="hasRole('ROLE_ADMIN')" href="/admin/user/list" id="adminUserListDropdown" th:text="#{adminUserList}"></a>
                 </div>
             </li>
 

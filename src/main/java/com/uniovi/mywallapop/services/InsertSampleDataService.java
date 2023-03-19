@@ -70,6 +70,13 @@ public class InsertSampleDataService {
         user12.setPassword("admin");
         user12.setRole(rolesService.getRoles()[1]);
 
+        for (int i = 1; i <= 10; i++) {
+            String email = "user" + String.format("%02d", i) + "@email.com";
+            User user = new User(email, "User " + i, "Lastname " + i);
+            user.setPassword("user01");
+            user.setRole(rolesService.getRoles()[0]);
+            usersService.addUser(user);
+        }
         // add users to repository
         usersService.addUser(user1);
         usersService.addUser(user2);

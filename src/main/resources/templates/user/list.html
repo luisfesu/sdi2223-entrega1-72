@@ -32,7 +32,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="user : ${usersList}">
-                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.email}" name="email"></td>
                     <td th:text="${user.name}"></td>
                     <td th:text="${user.lastName}"></td>
                     <td>
