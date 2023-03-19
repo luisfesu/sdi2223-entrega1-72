@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/head"/>
+<body>
+<nav th:replace="fragments/nav"/>
+<div class="container" id="main-container">
+  <h2 th:text="#{conversation.list.table.title}">Conversación</h2>
+  <p th:text="${offer.title}"></p>
+  <div class="table-responsive">
+    <table class="table table-hover" id="tableMessages" th:fragment="tableMessages">
+      <thead>
+      <tr>
+        <th scope="col" th:text="#{conversation.list.table.user}"></th>
+        <th scope="col" th:text="#{conversation.list.table.text}"></th>
+        <th scope="col" th:text="#{conversation.list.table.date}"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr th:each="message : ${messageList}">
+        <td th:text="${message.user.email}"></td>
+        <td th:text="${message.text}"></td>
+        <td th:text="${message.date}"></td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+  <form class="form-inline" th:action="${'/conversation/message/add/' + conversation.id}" method="post" th:object="${message}">
+    <div class="form-group">
+      <input name="text" type="text" class="form-control">
+      <span class="text-danger" th:if="${#fields.hasErrors('text')}"
+            th:errors="*{text}"></span>
+    </div>
+    <button type="submit" class="btn btn-primary" th:text="#{conversation.send}">Enviar</button>
+  </form>
+</div>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

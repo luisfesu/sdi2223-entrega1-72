@@ -4,9 +4,9 @@ import com.uniovi.mywallapop.entities.Offer;
 import com.uniovi.mywallapop.entities.User;
 import com.uniovi.mywallapop.services.*;
 import com.uniovi.mywallapop.validators.AddOfferValidator;
+import com.uniovi.mywallapop.validators.BuyOfferValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,7 +17,7 @@ import org.springframework.ui.Model;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,6 +29,9 @@ public class OffersController {
     private UsersService usersService;
     @Autowired
     private AddOfferValidator addOfferValidator;
+
+    @Autowired
+    private BuyOfferValidator buyOfferValidator;
 
 
     @RequestMapping(value = "/offer/add")
@@ -78,6 +81,7 @@ public class OffersController {
 
         Page<Offer> offers;
         String currentUserMail = principal.getName();
+        User user = usersService.getUserByEmail(currentUserMail);
 
         if(searchText != null && !searchText.isEmpty()) {
             offers = offersService.searchOfferByTitle(pageable, searchText);
@@ -87,6 +91,7 @@ public class OffersController {
 
         model.addAttribute("offerList", offers.getContent()); // Lista de ofertas
         model.addAttribute("page", offers); // Pagina
+        model.addAttribute("user", user);
         return "offer/search";
     }
 
@@ -115,5 +120,39 @@ public class OffersController {
 
         return "redirect:/offer/list";
 
+    }
+
+    @RequestMapping("/offer/buy/{id}")
+    public String buyOffer(@ModelAttribute Offer ofer, BindingResult result, Model model, Pageable pageable,
+                           @PathVariable Long id, Principal principal){
+        String email = principal.getName();
+        User user = usersService.getUserByEmail(email);
+
+        Offer offer = offersService.getOffer(id);
+
+        List<Object> target = new ArrayList<>();
+        target.add(offer);
+        target.add(user);
+        buyOfferValidator.validate(target, result);
+
+        if(result.hasErrors()){
+            Page<Offer> offers = offersService.getAllOffers(pageable);
+            model.addAttribute("offerList", offers.getContent());
+            model.addAttribute("page", offers);
+            return "offer/search";
+        }
+
+        offersService.buyOffer(offer, user);
+        usersService.decreaseMoney(user, offer.getPrice());
+
+        return "redirect:/offer/search";
+    }
+
+    @RequestMapping("/offer/search/update")
+    public String updateList(Model model, Pageable pageable, Principal principal){
+        Page<Offer> offers = offersService.getAllOffers(pageable);
+        model.addAttribute("offerList", offers.getContent());
+        model.addAttribute("page", offers);
+        return "offer/search :: tableOffers";
     }
 }
