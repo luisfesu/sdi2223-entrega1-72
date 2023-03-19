@@ -24,9 +24,9 @@ class MywallapopApplicationTests {
     static String PathFirefox = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
 
     // Ruta de Gecko Driver
-    static String Geckodriver = "C:\\Users\\pablo\\Desktop\\uni\\2022-2023\\sdi\\SDI-2223-705-lab-spring\\PL-SDI-Sesión5-material\\geckodriver-v0.30.0-win64.exe";
+    //static String Geckodriver = "C:\\Users\\pablo\\Desktop\\uni\\2022-2023\\sdi\\SDI-2223-705-lab-spring\\PL-SDI-Sesión5-material\\geckodriver-v0.30.0-win64.exe";
 
-   //static String Geckodriver = "C:\\Dev\\tools\\selenium\\geckodriver-v0.30.0-win64.exe";
+   static String Geckodriver = "C:\\Dev\\tools\\selenium\\geckodriver-v0.30.0-win64.exe";
 
     static WebDriver driver = getDriver(PathFirefox, Geckodriver);
     static String URL = "http://localhost:8090";
@@ -97,7 +97,7 @@ class MywallapopApplicationTests {
         elements.get(0).click();
         elements = PO_View.checkElementBy(driver, "id", "logout"); // //li/a
         elements.get(0).click();
-        PO_Login.fillLoginForm(driver,"test@mail.com","test123");
+        PO_LoginView.fillLoginForm(driver,"test@mail.com","test123");
         elements = PO_View.checkElementByKey(driver,"home",0 ); // //li/a
         elements.get(0).click();
     }
