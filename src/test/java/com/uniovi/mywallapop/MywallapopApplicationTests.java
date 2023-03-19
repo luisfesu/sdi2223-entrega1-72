@@ -12,6 +12,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.swing.text.Element;
 import javax.swing.text.Utilities;
 import java.util.*;
 
@@ -59,6 +60,52 @@ class MywallapopApplicationTests {
 
     @Test
     void contextLoads() {
+    }
+
+    @Test
+    @Order(5)
+    void Prueba5() {
+        // Iniciamos sesión en la aplicación
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "admin@email.com", "admin");
+
+        // Comprobamos que aparezca el nombre de usuario
+        SeleniumUtils.textIsPresentOnPage(driver, "admin@email.com");
+    }
+
+    @Test
+    @Order(6)
+    void Prueba6() {
+        // Iniciamos sesión en la aplicación
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "pedro@mail.com", "123456");
+
+        // Comprobamos que aparezca el nombre de usuario
+        SeleniumUtils.textIsPresentOnPage(driver, "pedro@mail.com");
+    }
+
+    @Test
+    @Order(7)
+    void Prueba7() {
+        // Iniciamos sesión en la aplicación
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "", ""); // Datos Invalidos, Vacios
+
+        List<WebElement> elements = PO_View.checkElementBy(driver, "id", "username");
+
+        Assertions.assertEquals(elements.isEmpty(), false);
+    }
+
+    @Test
+    @Order(8)
+    void Prueba8() {
+        // Iniciamos sesión en la aplicación
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "pedro@mail.com", "contrasenaIncorrecta"); // Datos Validos, contraseña erronea
+
+        List<WebElement> elements = PO_View.checkElementBy(driver, "id", "username");
+
+        Assertions.assertEquals(elements.isEmpty(), false);
     }
 
     @Test
