@@ -24,7 +24,9 @@ class MywallapopApplicationTests {
     static String PathFirefox = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
 
     // Ruta de Gecko Driver
-    static String Geckodriver = "C:\\Dev\\tools\\selenium\\geckodriver-v0.30.0-win64.exe";
+    static String Geckodriver = "C:\\Users\\pablo\\Desktop\\uni\\2022-2023\\sdi\\SDI-2223-705-lab-spring\\PL-SDI-Sesión5-material\\geckodriver-v0.30.0-win64.exe";
+
+   //static String Geckodriver = "C:\\Dev\\tools\\selenium\\geckodriver-v0.30.0-win64.exe";
 
     static WebDriver driver = getDriver(PathFirefox, Geckodriver);
     static String URL = "http://localhost:8090";
@@ -86,7 +88,19 @@ class MywallapopApplicationTests {
         // Comprobamos que el texto de la nueva oferta está presente en la pagina
         SeleniumUtils.textIsPresentOnPage(driver, titleTest);
     }
-
+    @Test
+    @Order(1)
+    void Prueba1(){
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_SignUpView.fillLoginForm(driver,"test@mail.com","test","testeable","test123","test123");
+        List<WebElement> elements = PO_View.checkElementByKey(driver,"home",0 ); // //li/a
+        elements.get(0).click();
+        elements = PO_View.checkElementBy(driver, "id", "logout"); // //li/a
+        elements.get(0).click();
+        PO_Login.fillLoginForm(driver,"test@mail.com","test123");
+        elements = PO_View.checkElementByKey(driver,"home",0 ); // //li/a
+        elements.get(0).click();
+    }
     @Test
     @Order(16)
     void Prueba16() {
