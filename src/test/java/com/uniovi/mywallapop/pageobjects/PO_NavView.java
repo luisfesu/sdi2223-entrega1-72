@@ -93,6 +93,50 @@ public class PO_NavView extends PO_View{
         By btn = By.className("btn");
         driver.findElement(btn).click();
     }
+
+    public static void changeLanguageToEnglish(WebDriver driver) {
+        List<WebElement> elements = PO_View.checkElementBy(driver, "id", "btnLanguage");
+        elements.get(0).click();
+        elements = PO_View.checkElementBy(driver, "id", "btnEnglish");
+        elements.get(0).click();
+    }
+
+    public static void changeLanguageToSpanish(WebDriver driver) {
+        List<WebElement> elements = PO_View.checkElementBy(driver, "id", "btnLanguage");
+        elements.get(0).click();
+        elements = PO_View.checkElementBy(driver, "id", "btnSpanish");
+        elements.get(0).click();
+    }
+
+    public static void goToAddOffer(WebDriver driver) {
+        // Pinchamos en el menu de Mis Ofertas
+        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='offerDropdown']"); // //li/a
+        elements.get(0).click();
+
+        // Pinchamos en la opción de añadir Oferta
+        elements = PO_View.checkElementBy(driver, "id", "addOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
+        elements.get(0).click();
+    }
+
+    public static void goToListSelfOffers(WebDriver driver) {
+        // Pinchamos en el menu de Mis Ofertas
+        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='offerDropdown']"); // //li/a
+        elements.get(0).click();
+
+        // Pinchamos en la opción de listar Oferta
+        elements = PO_View.checkElementBy(driver, "id", "listOffers");
+        elements.get(0).click();
+    }
+
+    public static void goToSearchfOffers(WebDriver driver) {
+        // Pinchamos en el menu de Mis Ofertas
+        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='navbarDropdown']"); // //li/a
+        elements.get(0).click();
+
+        // Pinchamos en la opción de listar Oferta
+        elements = PO_View.checkElementBy(driver, "id", "listOffers");
+        elements.get(0).click();
+    }
 }
 
 

@@ -30,9 +30,9 @@ class MywallapopApplicationTests {
     static String PathFirefox = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
 
     // Ruta de Gecko Driver
-    static String Geckodriver = "C:\\Users\\pablo\\Desktop\\uni\\2022-2023\\sdi\\SDI-2223-705-lab-spring\\PL-SDI-Sesión5-material\\geckodriver-v0.30.0-win64.exe";
+    //static String Geckodriver = "C:\\Users\\pablo\\Desktop\\uni\\2022-2023\\sdi\\SDI-2223-705-lab-spring\\PL-SDI-Sesión5-material\\geckodriver-v0.30.0-win64.exe";
 
-   //static String Geckodriver = "C:\\Dev\\tools\\selenium\\geckodriver-v0.30.0-win64.exe";
+   static String Geckodriver = "C:\\Dev\\tools\\selenium\\geckodriver-v0.30.0-win64.exe";
 
     static WebDriver driver = getDriver(PathFirefox, Geckodriver);
     static String URL = "http://localhost:8090";
@@ -399,6 +399,103 @@ class MywallapopApplicationTests {
 
         // Comprobamos que el texto de la oferta ya no está en la lista.
         SeleniumUtils.waitTextIsNotPresentOnPage(driver, checkText, PO_View.getTimeout());
+    }
+
+    @Test
+    @Order(29)
+    void Prueba29() {
+        // PAGINA 1: Comprobamos que se puede internacionalizar el Index (Home):
+        PO_HomeView.checkChangeLanguage(driver, "btnSpanish", "btnEnglish",
+                PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
+
+        // Iniciamos sesión en la aplicación
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "pedro@mail.com", "123456");
+
+
+        //PAGINA 2: Añadir Oferta
+        // Vamos a la pantalla de añadir oferta
+        PO_NavView.goToAddOffer(driver);
+
+        // Comprobamos elementos
+        PO_HomeView.changeLanguageToSpanish(driver); // 1. Español
+
+        // 1. Titulo H2
+        List<WebElement> elements = SeleniumUtils.waitLoadElementsBy(driver, "text",
+                PO_View.getP().getString("offer.add.h2", PO_Properties.getSPANISH()), PO_View.getTimeout());
+        Assertions.assertEquals(elements.get(0).getText(), "Crea una nueva oferta");
+
+        // 2. Titulo Label Título
+        elements = SeleniumUtils.waitLoadElementsBy(driver, "text",
+                PO_View.getP().getString("offer.add.title.label", PO_Properties.getSPANISH()), PO_View.getTimeout());
+        Assertions.assertEquals(elements.get(0).getText(), "Titulo de la oferta");
+
+        PO_HomeView.changeLanguageToEnglish(driver); // 2. Inglés
+
+        elements = SeleniumUtils.waitLoadElementsBy(driver, "text",
+                PO_View.getP().getString("offer.add.h2", PO_Properties.getENGLISH()), PO_View.getTimeout());
+        Assertions.assertEquals(elements.get(0).getText(), "Create new Offer");
+
+        // 2. Titulo Label Título
+        elements = SeleniumUtils.waitLoadElementsBy(driver, "text",
+                PO_View.getP().getString("offer.add.title.label", PO_Properties.getENGLISH()), PO_View.getTimeout());
+        Assertions.assertEquals(elements.get(0).getText(), "Offer Title");
+
+        //PAGINA 3: Listar Oferta
+        // Vamos a la pantalla de listar ofertas
+        PO_NavView.goToListSelfOffers(driver);
+        PO_HomeView.changeLanguageToSpanish(driver); // 1. Español
+
+        // 1. párrafo de presentación
+        elements = SeleniumUtils.waitLoadElementsBy(driver, "text",
+                PO_View.getP().getString("offer.list.paragraph", PO_Properties.getSPANISH()), PO_View.getTimeout());
+        Assertions.assertEquals(elements.get(0).getText(), "Estas son las ofertas que has creado en MyWallapop");
+
+        // 2. Label de tabla Descripción
+        elements = SeleniumUtils.waitLoadElementsBy(driver, "text",
+                PO_View.getP().getString("offer.list.table.description", PO_Properties.getSPANISH()), PO_View.getTimeout());
+        Assertions.assertEquals(elements.get(0).getText(), "Descripcion");
+
+        PO_HomeView.changeLanguageToEnglish(driver); // 2. Inglés
+
+        // 1. párrafo de presentación
+        elements = SeleniumUtils.waitLoadElementsBy(driver, "text",
+                PO_View.getP().getString("offer.list.paragraph", PO_Properties.getENGLISH()), PO_View.getTimeout());
+        Assertions.assertEquals(elements.get(0).getText(), "These are the offers you have created on MyWallapop");
+
+        // 2. Label de tabla Descripción
+        elements = SeleniumUtils.waitLoadElementsBy(driver, "text",
+                PO_View.getP().getString("offer.list.table.description", PO_Properties.getENGLISH()), PO_View.getTimeout());
+        Assertions.assertEquals(elements.get(0).getText(), "Description");
+
+
+        //PAGINA 4: Buscar Ofertas
+        // Vamos a la pantalla de listar ofertas
+        PO_NavView.goToListSelfOffers(driver);
+        PO_HomeView.changeLanguageToSpanish(driver); // 1. Español
+
+        // 1. párrafo de presentación
+        elements = SeleniumUtils.waitLoadElementsBy(driver, "text",
+                PO_View.getP().getString("offer.search.table.title", PO_Properties.getSPANISH()), PO_View.getTimeout());
+        Assertions.assertEquals(elements.get(0).getText(), "Titulo");
+
+        // 2. Label de tabla Descripción
+        elements = SeleniumUtils.waitLoadElementsBy(driver, "text",
+                PO_View.getP().getString("offer.search.table.price", PO_Properties.getSPANISH()), PO_View.getTimeout());
+        Assertions.assertEquals(elements.get(0).getText(), "Precio");
+
+        PO_HomeView.changeLanguageToEnglish(driver); // 2. Inglés
+
+        // 1. párrafo de presentación
+        elements = SeleniumUtils.waitLoadElementsBy(driver, "text",
+                PO_View.getP().getString("offer.search.table.title", PO_Properties.getENGLISH()), PO_View.getTimeout());
+        Assertions.assertEquals(elements.get(0).getText(), "Title");
+
+        // 2. Label de tabla Descripción
+        elements = SeleniumUtils.waitLoadElementsBy(driver, "text",
+                PO_View.getP().getString("offer.search.table.price", PO_Properties.getENGLISH()), PO_View.getTimeout());
+        Assertions.assertEquals(elements.get(0).getText(), "Price");
+
     }
 
     @Test
