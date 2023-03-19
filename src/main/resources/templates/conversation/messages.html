@@ -27,9 +27,11 @@
 
     </table>
   </div>
-  <form class="form-inline" th:action="${'/conversation/message/add/' + conversation.id}" method="post">
+  <form class="form-inline" th:action="${'/conversation/message/add/' + conversation.id}" method="post" th:object="${message}">
     <div class="form-group">
-      <input name="messageText" type="text" class="form-control">
+      <input name="text" type="text" class="form-control">
+      <span class="text-danger" th:if="${#fields.hasErrors('text')}"
+            th:errors="*{text}"></span>
     </div>
     <button type="submit" class="btn btn-primary" th:text="#{conversation.send}">Enviar</button>
   </form>

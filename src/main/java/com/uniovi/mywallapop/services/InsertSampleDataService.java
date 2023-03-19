@@ -29,6 +29,10 @@ public class InsertSampleDataService {
         user2.setPassword("123456");
         user2.setRole(rolesService.getRoles()[0]);
 
+        User user3 = new User("maria@mail.com", "Miguel", "Perez");
+        user3.setPassword("123456");
+        user3.setRole(rolesService.getRoles()[0]);
+
         Offer offer1 = new Offer("oferta 1", "esta es la oferta 1, del usuario 1",100.0, LocalDateTime.now().toString());
         Offer offer2 = new Offer("oferta 2", "esta es la oferta 2, del usuario 1",100.0, LocalDateTime.now().toString());
         Offer offer3 = new Offer("oferta 3", "esta es la oferta 3, del usuario 1",100.0, LocalDateTime.now().toString());

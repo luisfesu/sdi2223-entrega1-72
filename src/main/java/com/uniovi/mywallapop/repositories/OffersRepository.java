@@ -4,9 +4,11 @@ import com.uniovi.mywallapop.entities.Offer;
 import com.uniovi.mywallapop.entities.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface OffersRepository extends CrudRepository<Offer, Long> {
@@ -24,4 +26,9 @@ public interface OffersRepository extends CrudRepository<Offer, Long> {
      * @return Lista de Ofertas para creadas por el usuario registrado.
      */
     List<Offer> findAllByUser(User user);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Offer SET buyed = true , buyer = ?2 where id = ?1")
+    void updatePurchased(Long id, User user);
 }

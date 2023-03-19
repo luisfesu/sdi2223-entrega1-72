@@ -6,13 +6,13 @@
 <nav th:replace="fragments/nav"></nav>
 
 <div class="container" id="main-container">
-  <h2>Conversaciones</h2>
+  <h2 th:text="#{conversation.add}">Conversaciones</h2>
   <div class="table-responsive">
     <table class="table table-hover" id="tableConversations">
       <thead>
       <tr>
         <th scope="col">id</th>
-        <th scope="col">Descripción</th>
+        <th scope="col" th:text="#{conversation.list.nombre}">Nombre</th>
         <th scope="col"></th>
       </tr>
       </thead>
@@ -20,7 +20,7 @@
       <tr th:each="conversation : ${conversationList}">
         <td th:text="${conversation.offer.user.email}"> 1</td>
         <td th:text="${conversation.offer.title}"> Ejercicio 1</td>
-        <td><a th:href="${'/conversation/details/' + conversation.id}">Entrar</a></td>
+        <td><a th:text="#{conversation.enter}" th:href="${'/conversation/details/' + conversation.id}">Entrar</a></td>
         </td>
       </tr>
       </tbody>

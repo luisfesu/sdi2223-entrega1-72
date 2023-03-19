@@ -42,4 +42,8 @@ public class UsersService {
     public User getUserByEmail(String email) {
         return usersRepository.findByEmail(email);
     }
+
+    public void decreaseMoney(User user, Double price) {
+        usersRepository.updateMoney(user.getId(), price);
+    }
 }

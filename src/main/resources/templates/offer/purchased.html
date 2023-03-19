@@ -6,16 +6,15 @@
 <nav th:replace="fragments/nav"></nav>
 
 <div class="container" id="main-container">
-  <h2>Mis ofertas compradas</h2>
-  <p>Las ofertas que has comprado son:</p>
+  <h2 th:text="#{offer.purchased}">Mis ofertas compradas</h2>
   <div class="table-responsive">
-    <table class="table table-hover">
+    <table class="table table-hover" id="tablePurchased">
       <thead>
       <tr>
-        <th scope="col">Título</th>
-        <th scope="col">Detalle</th>
-        <th scope="col">Precio</th>
-        <th scope="col">Email Vendedor</th>
+        <th scope="col" th:text="#{offer.purchased.title}">Título</th>
+        <th scope="col" th:text="#{offer.purchased.detail}">Detalle</th>
+        <th scope="col" th:text="#{offer.purchased.price}">Precio</th>
+        <th scope="col" th:text="#{offer.purchased.email}">Email Vendedor</th>
       </tr>
       </thead>
       <tbody>

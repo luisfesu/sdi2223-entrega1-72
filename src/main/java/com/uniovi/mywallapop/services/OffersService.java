@@ -48,4 +48,9 @@ public class OffersService {
     public List<Offer> getOffersByUser(User user) {
         return offersRepository.findAllByUser(user);
     }
+
+
+    public void buyOffer(Offer offer, User user) {
+        offersRepository.updatePurchased(offer.getId(), user);
+    }
 }

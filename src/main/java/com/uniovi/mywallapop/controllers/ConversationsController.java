@@ -8,9 +8,12 @@ import com.uniovi.mywallapop.services.ConversationsService;
 import com.uniovi.mywallapop.services.MessagesService;
 import com.uniovi.mywallapop.services.OffersService;
 import com.uniovi.mywallapop.services.UsersService;
+import com.uniovi.mywallapop.validators.SendMessageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,6 +37,9 @@ public class ConversationsController {
     @Autowired
     private MessagesService messagesService;
 
+    @Autowired
+    private SendMessageValidator sendMessageValidator;
+
     @RequestMapping(value = "/conversation/add/{id}", method = RequestMethod.GET)
     private String getConversation(Model model, @PathVariable Long id, Principal principal){
         Offer offer = offersService.getOffer(id);
@@ -42,19 +48,36 @@ public class ConversationsController {
         String email = principal.getName();
         User user = usersService.getUserByEmail(email);
 
-        Conversation conversation = conversationsService.createConversation(seller, user, offer);
+        Conversation conversation = conversationsService.getConversationByUserSellerAndOffer(seller, user, offer);
+
+        if(conversation != null){
+            return "redirect:/conversation/details/" + conversation.getId();
+        }
+
+        conversation = conversationsService.createConversation(seller, user, offer);
 
         return "redirect:/conversation/details/" + conversation.getId();
     }
 
     @RequestMapping(value = "conversation/message/add/{id}", method = RequestMethod.POST)
-    private String uploadMessage(Model model, @PathVariable Long id, Principal principal,
-                                 @RequestParam String messageText){
+    private String uploadMessage(@Validated Message message, BindingResult result, Model model,
+                                 @PathVariable Long id, Principal principal){
+
+        sendMessageValidator.validate(message, result);
+        if(result.hasErrors()){
+            Conversation conversation = conversationsService.getConversation(id);
+            List<Message> messages = messagesService.getMessagesByConversation(conversation);
+
+            model.addAttribute("messageList", messages);
+            model.addAttribute("offer", conversation.getOffer());
+            model.addAttribute("conversation", conversation);
+            return "conversation/messages";
+        }
 
         User user = usersService.getUserByEmail(principal.getName());
 
         Conversation conversation = conversationsService.getConversation(id);
-        messagesService.addMessage(conversation,user, messageText);
+        messagesService.addMessage(conversation,user, message.getText());
 
         return "redirect:/conversation/details/" + conversation.getId();
     }
@@ -77,6 +100,7 @@ public class ConversationsController {
         model.addAttribute("messageList", messages);
         model.addAttribute("offer", conversation.getOffer());
         model.addAttribute("conversation", conversation);
+        model.addAttribute("message", new Message());
 
         return "conversation/messages";
     }
