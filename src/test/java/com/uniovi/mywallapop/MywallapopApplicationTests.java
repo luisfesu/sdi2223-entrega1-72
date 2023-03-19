@@ -85,4 +85,32 @@ class MywallapopApplicationTests {
         // Comprobamos que el texto de la nueva oferta está presente en la pagina
         SeleniumUtils.textIsPresentOnPage(driver, titleTest);
     }
+
+    @Test
+    @Order(16)
+    void Prueba16() {
+        // Iniciamos sesión en la aplicación
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, "pedro@mail.com", "123456");
+
+        // Pinchamos en la opción de Añadir Oferta
+        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//*[@id='offerDropdown']"); // //li/a
+        elements.get(0).click();
+
+        // Esperamos a que aparezca la opción de añadir Oferta
+        elements = PO_View.checkElementBy(driver, "id", "addOffer"); // etiqueta <a/> que redirecciona a la creación de ofertas
+        elements.get(0).click();
+
+        // Rellenamos el formulario
+        String titleTest = "Oferta Nueva 1";
+        String descriptionTest = "Descricion de la nueva oferta";
+        String priceNegative = "-100.00";
+        PO_PrivateView.fillFormAddOffer(driver,titleTest, descriptionTest, priceNegative);
+
+        // comprobamos que aparece el mensaje de error en la pagina
+        // mensaje de error: error.addOffer.price.value
+        List<WebElement> result = PO_View.checkElementByKey(driver, "error.addOffer.price.value", PO_Properties.getSPANISH());
+        String checkText = PO_HomeView.getP().getString("error.addOffer.price.value", PO_Properties.getSPANISH());
+        Assertions.assertEquals(checkText, result.get(0).getText());
+    }
 }
